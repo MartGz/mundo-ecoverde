@@ -50,7 +50,7 @@ export default function ContactSection() {
       icon: MapPin,
       title: 'Dirección',
       content: 'Barrio Henequén, Calle Principal Mza D Lte 3, Cartagena, Bolívar',
-      link: 'https://maps.google.com'
+      link: 'https://maps.google.com/?q=Barrio+Henequén+Cartagena'
     },
     {
       icon: Clock,
@@ -61,13 +61,14 @@ export default function ContactSection() {
   ]
 
   return (
-    <section id="contacto" className="py-20 bg-green-900 text-white">
-      <div className="container mx-auto px-6">
+    <section id="contacto" className="section section-dark">
+      <div className="container-eco">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Contáctenos
           </h2>
-          <p className="text-xl text-green-100 max-w-3xl mx-auto">
+          <div className="divider-eco bg-[var(--verde-claro)]"></div>
+          <p className="text-xl text-[var(--verde-menta)] max-w-3xl mx-auto">
             Estamos listos para atender sus necesidades en gestión de residuos. ¡Escríbanos o llámenos!
           </p>
         </div>
@@ -75,51 +76,61 @@ export default function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Información de Contacto */}
           <div>
-            <h3 className="text-2xl font-bold mb-6">Información de Contacto</h3>
+            <h3 className="text-2xl font-bold mb-8 text-white">Información de Contacto</h3>
             
-            <div className="space-y-6 mb-8">
+            <div className="space-y-6 mb-10">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <item.icon className="w-6 h-6" />
+                <div 
+                  key={index} 
+                  className="flex items-start space-x-4 bg-[var(--verde-oscuro)]/50 p-4 rounded-xl hover:bg-[var(--verde-oscuro)]/70 transition-all duration-300"
+                >
+                  <div className="w-12 h-12 bg-[var(--verde-principal)] rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                    <item.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
+                    <h4 className="font-semibold text-lg mb-1 text-white">{item.title}</h4>
                     {item.link ? (
                       <a 
                         href={item.link} 
-                        className="text-green-200 hover:text-white transition"
+                        className="text-[var(--verde-claro)] hover:text-white transition-colors"
                       >
                         {item.content}
                       </a>
                     ) : (
-                      <p className="text-green-200 whitespace-pre-line">{item.content}</p>
+                      <p className="text-[var(--verde-menta)] whitespace-pre-line">{item.content}</p>
                     )}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Mapa */}
-            <div className="bg-green-800 rounded-2xl p-6">
-              <h4 className="font-semibold text-lg mb-4">Ubicación</h4>
-              <div className="bg-green-700 rounded-lg h-48 flex items-center justify-center">
-                <p className="text-green-200 text-center">
-                  Mapa interactivo de Google Maps<br />
-                  Barrio Henequén, Cartagena
-                </p>
+            {/* Mapa Preview */}
+            <div className="bg-[var(--verde-oscuro)]/50 rounded-2xl p-6 border-2 border-[var(--verde-principal)]">
+              <h4 className="font-semibold text-lg mb-4 text-white">📍 Ubicación</h4>
+              <div className="bg-[var(--verde-principal)]/20 rounded-lg h-48 flex items-center justify-center border border-[var(--verde-claro)]">
+                <div className="text-center">
+                  <MapPin className="w-12 h-12 text-[var(--verde-claro)] mx-auto mb-3" />
+                  <p className="text-white font-semibold">
+                    Barrio Henequén
+                  </p>
+                  <p className="text-[var(--verde-menta)] text-sm">
+                    Cartagena, Bolívar
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Formulario de Contacto */}
-          <div className="bg-white rounded-2xl p-8 text-gray-900">
-            <h3 className="text-2xl font-bold mb-6 text-green-900">Envíenos un Mensaje</h3>
+          <div className="card p-8 animate-fade-in">
+            <h3 className="text-2xl font-bold mb-6 text-[var(--verde-oscuro)]">
+              Envíenos un Mensaje
+            </h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-[var(--gris-neutral)] mb-2">
                     Nombre Completo *
                   </label>
                   <input
@@ -128,13 +139,13 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-[var(--gris-claro)] rounded-lg focus:ring-2 focus:ring-[var(--verde-principal)] focus:border-[var(--verde-principal)] transition-all"
                     placeholder="Su nombre completo"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-[var(--gris-neutral)] mb-2">
                     Teléfono *
                   </label>
                   <input
@@ -143,14 +154,14 @@ export default function ContactSection() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-[var(--gris-claro)] rounded-lg focus:ring-2 focus:ring-[var(--verde-principal)] focus:border-[var(--verde-principal)] transition-all"
                     placeholder="Su número de teléfono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-[var(--gris-neutral)] mb-2">
                   Email *
                 </label>
                 <input
@@ -159,20 +170,20 @@ export default function ContactSection() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-[var(--gris-claro)] rounded-lg focus:ring-2 focus:ring-[var(--verde-principal)] focus:border-[var(--verde-principal)] transition-all"
                   placeholder="su.email@ejemplo.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-[var(--gris-neutral)] mb-2">
                   Servicio de Interés
                 </label>
                 <select
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-[var(--gris-claro)] rounded-lg focus:ring-2 focus:ring-[var(--verde-principal)] focus:border-[var(--verde-principal)] transition-all"
                 >
                   <option value="">Seleccione un servicio</option>
                   <option value="recoleccion">Recolección Selectiva</option>
@@ -185,7 +196,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-[var(--gris-neutral)] mb-2">
                   Mensaje *
                 </label>
                 <textarea
@@ -194,18 +205,22 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-[var(--gris-claro)] rounded-lg focus:ring-2 focus:ring-[var(--verde-principal)] focus:border-[var(--verde-principal)] transition-all resize-none"
                   placeholder="Describa su requerimiento..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-green-600 to-green-500 text-white py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:shadow-lg transition"
+                className="btn-primary w-full flex items-center justify-center space-x-2"
               >
                 <Send className="w-5 h-5" />
                 <span>Enviar Mensaje</span>
               </button>
+
+              <p className="text-sm text-[var(--gris-neutral)] text-center">
+                * Campos obligatorios
+              </p>
             </form>
           </div>
         </div>
