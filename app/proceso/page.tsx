@@ -1,6 +1,12 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import Link from 'next/link'
+
+export const metadata = {
+  title: 'Proceso - Mundo Eco Verde',
+  description: 'Conoce nuestro proceso integral de gestión de residuos desde la recolección hasta la comercialización',
+}
 
 export default function ProcesoPage() {
   const etapasDetalladas = [
@@ -130,13 +136,13 @@ export default function ProcesoPage() {
       <Navbar />
       
       {/* Hero Section para Proceso */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-white">
-        <div className="container mx-auto px-6">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-eco-verde-800 to-eco-verde-900 text-white">
+        <div className="container-eco">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Nuestro Proceso
             </h1>
-            <p className="text-xl md:text-2xl text-green-100 leading-relaxed">
+            <p className="text-xl md:text-2xl text-eco-verde-100 leading-relaxed">
               Conoce cada etapa de nuestro sistema integral de gestión de residuos, 
               diseñado para maximizar el aprovechamiento y garantizar la sostenibilidad.
             </p>
@@ -146,12 +152,12 @@ export default function ProcesoPage() {
 
       {/* Proceso Detallado */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
+        <div className="container-eco">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-green-900 mb-4">
+            <h2 className="text-4xl font-bold text-eco-verde-800 mb-4">
               Ciclo Completo de Gestión
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-eco-neutral-gris max-w-3xl mx-auto">
               Desde la separación en fuente hasta la comercialización, cada etapa está 
               optimizada para garantizar eficiencia, calidad y máximo impacto ambiental positivo.
             </p>
@@ -159,35 +165,35 @@ export default function ProcesoPage() {
 
           <div className="space-y-8">
             {etapasDetalladas.map((etapa, index) => (
-              <div key={index} className="bg-green-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300">
+              <div key={index} className="bg-eco-verde-50 rounded-2xl p-8 hover:shadow-eco-lg transition-all duration-300">
                 <div className="grid md:grid-cols-12 gap-6 items-start">
                   {/* Número e Icono */}
                   <div className="md:col-span-2 text-center">
-                    <div className="bg-gradient-to-br from-green-600 to-green-500 text-white rounded-2xl p-6 mb-4">
+                    <div className="bg-gradient-to-br from-eco-verde-600 to-eco-verde-500 text-white rounded-2xl p-6 mb-4">
                       <div className="text-3xl font-bold mb-2">{etapa.numero}</div>
                       <div className="text-4xl">{etapa.icono}</div>
                     </div>
                     <div className="bg-white rounded-lg p-3">
-                      <p className="text-sm font-semibold text-green-800">{etapa.duracion}</p>
+                      <p className="text-sm font-semibold text-eco-verde-800">{etapa.duracion}</p>
                     </div>
                   </div>
                   
                   {/* Contenido Principal */}
                   <div className="md:col-span-7">
-                    <h3 className="text-2xl font-bold text-green-900 mb-3">
+                    <h3 className="text-2xl font-bold text-eco-verde-800 mb-3">
                       {etapa.titulo}
                     </h3>
-                    <p className="text-gray-700 mb-4 text-lg leading-relaxed">
+                    <p className="text-eco-neutral-gris mb-4 text-lg leading-relaxed">
                       {etapa.descripcion}
                     </p>
                     
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <h4 className="font-semibold text-green-800 mb-2">📝 Actividades:</h4>
+                        <h4 className="font-semibold text-eco-verde-800 mb-2">📝 Actividades:</h4>
                         <ul className="space-y-1">
                           {etapa.actividades.map((actividad, idx) => (
-                            <li key={idx} className="flex items-center text-sm text-green-700">
-                              <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
+                            <li key={idx} className="flex items-center text-sm text-eco-verde-700">
+                              <span className="w-1.5 h-1.5 bg-eco-verde-500 rounded-full mr-2"></span>
                               {actividad}
                             </li>
                           ))}
@@ -198,9 +204,9 @@ export default function ProcesoPage() {
                   
                   {/* Resultado */}
                   <div className="md:col-span-3">
-                    <div className="bg-white rounded-xl p-4 border-l-4 border-green-500">
-                      <h4 className="font-bold text-green-800 mb-2">🎯 Resultado:</h4>
-                      <p className="text-green-700 text-sm">{etapa.resultado}</p>
+                    <div className="card rounded-xl p-4 border-l-4 border-eco-verde-500">
+                      <h4 className="font-bold text-eco-verde-800 mb-2">🎯 Resultado:</h4>
+                      <p className="text-eco-verde-700 text-sm">{etapa.resultado}</p>
                     </div>
                   </div>
                 </div>
@@ -211,13 +217,13 @@ export default function ProcesoPage() {
       </section>
 
       {/* Métricas del Proceso */}
-      <section className="py-20 bg-green-900 text-white">
-        <div className="container mx-auto px-6">
+      <section className="py-20 bg-eco-verde-900 text-white">
+        <div className="container-eco">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">
               Eficiencia Comprobada
             </h2>
-            <p className="text-xl text-green-100 max-w-2xl mx-auto">
+            <p className="text-xl text-eco-verde-100 max-w-2xl mx-auto">
               Nuestros números hablan por la calidad y eficiencia de nuestro proceso
             </p>
           </div>
@@ -225,11 +231,11 @@ export default function ProcesoPage() {
           <div className="grid md:grid-cols-4 gap-8">
             {metricasProceso.map((metrica, index) => (
               <div key={index} className="text-center">
-                <div className="bg-green-800 rounded-2xl p-8 hover:scale-105 transition-transform">
-                  <div className="text-5xl font-bold text-green-300 mb-4">
+                <div className="bg-eco-verde-800 rounded-2xl p-8 hover:scale-105 transition-transform">
+                  <div className="text-5xl font-bold text-eco-verde-300 mb-4">
                     {metrica.valor}
                   </div>
-                  <p className="text-green-100 text-lg font-semibold">
+                  <p className="text-eco-verde-100 text-lg font-semibold">
                     {metrica.descripcion}
                   </p>
                 </div>
@@ -241,9 +247,9 @@ export default function ProcesoPage() {
 
       {/* Beneficios del Sistema */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
+        <div className="container-eco">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-green-900 mb-4">
+            <h2 className="text-4xl font-bold text-eco-verde-800 mb-4">
               Beneficios de Nuestro Sistema
             </h2>
           </div>
@@ -278,14 +284,14 @@ export default function ProcesoPage() {
                 ]
               }
             ].map((beneficio, index) => (
-              <div key={index} className="bg-green-50 rounded-2xl p-6">
-                <h3 className="text-xl font-bold text-green-900 mb-4">
+              <div key={index} className="card-eco rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-eco-verde-800 mb-4">
                   {beneficio.titulo}
                 </h3>
                 <ul className="space-y-3">
                   {beneficio.items.map((item, idx) => (
-                    <li key={idx} className="flex items-center text-green-800">
-                      <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    <li key={idx} className="flex items-center text-eco-verde-700">
+                      <span className="w-2 h-2 bg-eco-verde-500 rounded-full mr-3"></span>
                       {item}
                     </li>
                   ))}
@@ -297,14 +303,14 @@ export default function ProcesoPage() {
       </section>
 
       {/* Tecnología y Innovación */}
-      <section className="py-20 bg-green-50">
-        <div className="container mx-auto px-6">
+      <section className="py-20 bg-eco-verde-50">
+        <div className="container-eco">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-green-900 mb-6">
+              <h2 className="text-4xl font-bold text-eco-verde-800 mb-6">
                 Tecnología en Nuestro Proceso
               </h2>
-              <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+              <div className="space-y-4 text-eco-neutral-gris text-lg leading-relaxed">
                 <p>
                   Integramos <strong>tecnología de punta</strong> en cada etapa de nuestro 
                   proceso para garantizar máxima eficiencia y trazabilidad completa.
@@ -321,46 +327,46 @@ export default function ProcesoPage() {
                     "App de seguimiento en tiempo real",
                     "Análisis de datos predictivos"
                   ].map((tech, idx) => (
-                    <div key={idx} className="bg-white rounded-lg p-3 text-center">
-                      <p className="text-green-800 font-semibold text-sm">{tech}</p>
+                    <div key={idx} className="card rounded-lg p-3 text-center">
+                      <p className="text-eco-verde-800 font-semibold text-sm">{tech}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
             
-            <div className="bg-gradient-to-br from-green-600 to-green-500 rounded-2xl p-8 text-white text-center">
+            <div className="bg-gradient-to-br from-eco-verde-600 to-eco-verde-500 rounded-2xl p-8 text-white text-center">
               <div className="text-6xl mb-4">🚀</div>
               <h3 className="text-2xl font-bold mb-4">Innovación Continua</h3>
-              <p className="text-green-100 mb-6">
+              <p className="text-eco-verde-100 mb-6">
                 Estamos en constante evolución para incorporar las mejores 
                 prácticas y tecnologías en beneficio de nuestros clientes y el medio ambiente.
               </p>
-              <button className="bg-white text-green-600 px-6 py-3 rounded-full font-semibold hover:bg-green-50 transition">
+              <Link href="/contacto" className="btn-secondary px-6 py-3 rounded-full font-semibold inline-block">
                 Conocer Más Innovaciones
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Final */}
-      <section className="py-20 bg-gradient-to-r from-green-600 to-green-700 text-white">
-        <div className="container mx-auto px-6 text-center">
+      <section className="py-20 bg-gradient-to-r from-eco-verde-600 to-eco-verde-700 text-white">
+        <div className="container-eco text-center">
           <h2 className="text-4xl font-bold mb-6">
             ¿Quieres Implementar Este Proceso?
           </h2>
-          <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-eco-verde-100 mb-8 max-w-2xl mx-auto">
             Comienza hoy mismo a transformar tu gestión de residuos con nuestro 
             sistema probado y certificado de aprovechamiento.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-white text-green-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-green-50 transition">
+            <Link href="/contacto" className="btn-secondary text-lg px-8 py-4 rounded-full font-semibold">
               📞 Iniciar Proceso
-            </button>
-            <button className="bg-green-800 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-green-900 transition">
+            </Link>
+            <Link href="/contacto" className="bg-eco-verde-800 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-eco-verde-900 transition">
               📥 Descargar Brochure
-            </button>
+            </Link>
           </div>
         </div>
       </section>
