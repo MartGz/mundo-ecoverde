@@ -16,50 +16,44 @@ export default function ContactoPage() {
       <div className="pt-20">
         <ContactSection />
         
-        {/* Mapa Section */}
-        <section className="py-20 bg-gray-100">
-          <div className="container mx-auto px-6">
+        {/* SOLO MANTENER EL MAPA - ELIMINAR LA SECCIÓN DE CONTACTO DUPLICADA */}
+        <section className="py-20 bg-eco-neutral-beige">
+          <div className="container-eco">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">Encuéntranos</h2>
-              <p className="text-xl text-gray-600">Visita nuestra Estación de Clasificación</p>
+              <h2 className="text-4xl font-bold text-eco-verde-800 mb-4">Encuéntranos</h2>
+              <p className="text-xl text-eco-neutral-gris">Visita nuestra Estación de Clasificación</p>
             </div>
             
-            <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
-              {/* Aquí puedes integrar Google Maps */}
-              <div className="h-96 bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-20 h-20 text-green-600 mx-auto mb-4" />
-                  <p className="text-gray-700 font-semibold text-lg">
+            <div className="card rounded-3xl overflow-hidden max-w-6xl mx-auto">
+              <div className="h-96 w-full">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.7654321!2d-75.5012345!3d10.3910123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDIzJzI3LjYiTiA3NcKwMzAnMDQuNCJX!5e0!3m2!1ses!2sco!4v1234567890"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Ubicación Mundo Eco Verde"
+                />
+              </div>
+              
+              <div className="p-6 bg-gradient-to-r from-eco-verde-50 to-eco-verde-100 text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <MapPin className="w-6 h-6 text-eco-verde-600 mr-2" />
+                  <p className="text-eco-verde-800 font-semibold text-lg">
                     Barrio Henequén, Calle Principal Mza D Lte 3
                   </p>
-                  <p className="text-gray-600">Cartagena, Bolívar, Colombia</p>
-                  <a 
-                    href="https://maps.google.com/?q=Barrio+Henequén+Cartagena" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block mt-4 bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition"
-                  >
-                    Abrir en Google Maps
-                  </a>
                 </div>
-              </div>
-            </div>
-            
-            {/* Horarios */}
-            <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-                <h3 className="font-bold text-green-900 mb-2">📅 Lunes a Viernes</h3>
-                <p className="text-gray-600">8:00 AM - 5:00 PM</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-                <h3 className="font-bold text-green-900 mb-2">📅 Sábados</h3>
-                <p className="text-gray-600">8:00 AM - 12:00 PM</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-                <h3 className="font-bold text-green-900 mb-2">📅 Domingos</h3>
-                <p className="text-gray-600">Cerrado</p>
+                <p className="text-eco-neutral-gris mb-4">Cartagena, Bolívar, Colombia</p>
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=Barrio+Henequén+Calle+Principal+Mza+D+Lte+3+Cartagena"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary inline-block px-6 py-3 rounded-full font-semibold"
+                >
+                  Abrir en Google Maps
+                </a>
               </div>
             </div>
           </div>
