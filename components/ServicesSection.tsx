@@ -1,102 +1,127 @@
-'use client'
+import React from 'react';
 
-import { Truck, Recycle, Factory, Trash2, Package, Sprout } from 'lucide-react'
-import Link from 'next/link'
-
-export default function ServicesSection() {
-  const services = [
-    {
-      icon: Truck,
-      title: 'Recolección Selectiva',
-      description: 'Recolección especializada de materiales aprovechables en fuente, separando residuos orgánicos e inorgánicos.',
-      features: ['Recolección programada', 'Separación en fuente', 'Logística especializada']
-    },
-    {
-      icon: Recycle,
-      title: 'Clasificación y Aprovechamiento',
-      description: 'Proceso de clasificación de materiales reciclables en nuestra estación ECA con tecnología y personal calificado.',
-      features: ['Clasificación manual y mecánica', 'Procesamiento de materiales', 'Control de calidad']
-    },
-    {
-      icon: Factory,
-      title: 'Gestión de Residuos',
-      description: 'Manejo integral de residuos sólidos para empresas, condominios y comunidades.',
-      features: ['Planes personalizados', 'Cumplimiento normativo', 'Reportes de gestión']
-    },
-    {
-      icon: Package,
-      title: 'Comercialización',
-      description: 'Venta y distribución de materiales reciclables procesados a industrias y transformadores.',
-      features: ['Materiales certificados', 'Precios competitivos', 'Trazabilidad completa']
-    },
-    {
-      icon: Sprout,
-      title: 'Educación Ambiental',
-      description: 'Programas de capacitación y concienciación sobre reciclaje y sostenibilidad ambiental.',
-      features: ['Talleres educativos', 'Charlas empresariales', 'Material didáctico']
-    },
-    {
-      icon: Trash2,
-      title: 'Limpieza Especial',
-      description: 'Servicios de limpieza y mantenimiento de áreas comunes y espacios públicos.',
-      features: ['Limpieza ecológica', 'Equipos especializados', 'Productos biodegradables']
-    }
-  ]
-
+const Services = () => {
   return (
-    <section id="servicios" className="py-20 bg-eco-verde-50">
-      <div className="container-eco">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-eco-verde-800 mb-4">
-            Nuestros Servicios
-          </h2>
-          <p className="text-xl text-eco-neutral-gris max-w-3xl mx-auto">
-            Soluciones integrales en manejo de residuos sólidos, desde la recolección hasta la comercialización de materiales aprovechables.
-          </p>
-        </div>
+    <section id="servicios" className="py-24 bg-white relative">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-full bg-brand-light/50 opacity-50 pointer-events-none -z-10"></div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div 
-              key={index}
-              className="card rounded-2xl p-6 hover:shadow-eco-lg transition-all duration-300 hover:transform hover:scale-105 group"
-            >
-              <div className="w-14 h-14 bg-gradient-to-br from-eco-verde-600 to-eco-verde-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <service.icon className="w-7 h-7 text-white" />
-              </div>
-              
-              <h3 className="text-xl font-bold text-eco-verde-800 mb-3">
-                {service.title}
-              </h3>
-              
-              <p className="text-eco-neutral-gris mb-4 leading-relaxed">
-                {service.description}
-              </p>
-              
-              <ul className="space-y-2">
-                {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center text-sm text-eco-verde-700">
-                    <div className="w-2 h-2 bg-eco-verde-500 rounded-full mr-3"></div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-16 card rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-eco-verde-800 mb-4">
-            ¿Necesita un servicio personalizado?
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-20 reveal">
+          <h2 className="text-brand-green font-bold uppercase text-sm mb-3 tracking-widest">Nuestra Oferta</h2>
+          <h3 className="text-3xl md:text-5xl font-extrabold text-brand-dark">
+            Soluciones Integrales 360°
           </h3>
-          <p className="text-eco-neutral-gris mb-6 max-w-2xl mx-auto">
-            Contáctenos para evaluar sus necesidades y desarrollar un plan de gestión de residuos a medida para su empresa o comunidad.
+          <p className="text-brand-gray mt-4 max-w-2xl mx-auto text-lg">
+            Gestionamos el ciclo completo de tus residuos con eficiencia, tecnología y responsabilidad ambiental.
           </p>
-          <Link href="/contacto" className="btn-primary px-8 py-3 rounded-full font-semibold inline-block">
-            Solicitar Cotización
-          </Link>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          {/* Card 1 */}
+          <div className="feature-card p-8 group border border-gray-100 shadow-sm bg-white rounded-[2rem] w-full text-center reveal">
+            <div className="w-20 h-20 bg-brand-green/10 rounded-full flex items-center justify-center mb-6 text-brand-green group-hover:bg-brand-green group-hover:text-white transition-colors duration-300 mx-auto">
+              <i className="fa-solid fa-truck-ramp-box text-3xl"></i>
+            </div>
+            <h4 className="text-xl font-bold text-brand-dark mb-3">Recolección Selectiva</h4>
+            <p className="text-brand-gray text-sm leading-relaxed mb-6">
+              Logística especializada para el retiro eficiente de materiales aprovechables en la fuente.
+            </p>
+            <ul className="text-sm text-brand-gray space-y-2 inline-block text-left">
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Recolección programada</li>
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Flota propia</li>
+            </ul>
+          </div>
+
+           {/* Card 2 */}
+           <div className="feature-card p-8 group border border-gray-100 shadow-sm bg-white rounded-[2rem] w-full text-center reveal delay-100">
+            <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 mx-auto">
+              <i className="fa-solid fa-recycle text-3xl"></i>
+            </div>
+            <h4 className="text-xl font-bold text-brand-dark mb-3">Clasificación ECA</h4>
+            <p className="text-brand-gray text-sm leading-relaxed mb-6">
+               Procesamiento técnico en nuestra Estación de Clasificación y Aprovechamiento (ECA).
+            </p>
+            <ul className="text-sm text-brand-gray space-y-2 inline-block text-left">
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Tecnología de punta</li>
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Control de calidad ISO</li>
+            </ul>
+          </div>
+
+          {/* Card 3 */}
+          <div className="feature-card p-8 group border border-gray-100 shadow-sm bg-white rounded-[2rem] w-full text-center reveal delay-200">
+            <div className="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mb-6 text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300 mx-auto">
+              <i className="fa-solid fa-dumpster text-3xl"></i>
+            </div>
+            <h4 className="text-xl font-bold text-brand-dark mb-3">Gestión de Residuos</h4>
+            <p className="text-brand-gray text-sm leading-relaxed mb-6">
+              Manejo integral de residuos sólidos para empresas y comunidades.
+            </p>
+            <ul className="text-sm text-brand-gray space-y-2 inline-block text-left">
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Planes personalizados</li>
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Reportes de gestión</li>
+            </ul>
+          </div>
+
+           {/* Card 4 */}
+           <div className="feature-card p-8 group border border-gray-100 shadow-sm bg-white rounded-[2rem] w-full text-center reveal delay-300">
+            <div className="w-20 h-20 bg-purple-50 rounded-full flex items-center justify-center mb-6 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300 mx-auto">
+              <i className="fa-solid fa-hand-holding-dollar text-3xl"></i>
+            </div>
+            <h4 className="text-xl font-bold text-brand-dark mb-3">Comercialización</h4>
+            <p className="text-brand-gray text-sm leading-relaxed mb-6">
+              Venta y distribución de materiales reciclables procesados. ¡Monetiza tus residuos!
+            </p>
+            <ul className="text-sm text-brand-gray space-y-2 inline-block text-left">
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Materiales certificados</li>
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Precios competitivos</li>
+            </ul>
+          </div>
+
+           {/* Card 5 */}
+           <div className="feature-card p-8 group border border-gray-100 shadow-sm bg-white rounded-[2rem] w-full text-center reveal delay-400">
+            <div className="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mb-6 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300 mx-auto">
+              <i className="fa-solid fa-chalkboard-user text-3xl"></i>
+            </div>
+            <h4 className="text-xl font-bold text-brand-dark mb-3">Educación Ambiental</h4>
+            <p className="text-brand-gray text-sm leading-relaxed mb-6">
+              Programas de capacitación y concienciación sobre reciclaje y sostenibilidad.
+            </p>
+            <ul className="text-sm text-brand-gray space-y-2 inline-block text-left">
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Talleres educativos</li>
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Charlas empresariales</li>
+            </ul>
+          </div>
+
+           {/* Card 6 */}
+           <div className="feature-card p-8 group border border-gray-100 shadow-sm bg-white rounded-[2rem] w-full text-center reveal delay-500">
+            <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mb-6 text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors duration-300 mx-auto">
+              <i className="fa-solid fa-broom text-3xl"></i>
+            </div>
+            <h4 className="text-xl font-bold text-brand-dark mb-3">Limpieza Especial</h4>
+            <p className="text-brand-gray text-sm leading-relaxed mb-6">
+              Servicios de aseo técnico y mantenimiento de áreas comunes y eventos.
+            </p>
+            <ul className="text-sm text-brand-gray space-y-2 inline-block text-left">
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Limpieza ecológica</li>
+              <li className="flex items-center gap-2"><i className="fa-solid fa-circle-check text-brand-green"></i> Equipos especializados</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-20 bg-gray-50 rounded-2xl p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-8 border border-gray-100 reveal max-w-5xl mx-auto shadow-sm">
+          <div className="md:w-2/3 text-center md:text-left">
+            <h4 className="text-2xl font-bold text-brand-dark mb-2">¿Necesita un servicio personalizado?</h4>
+            <p className="text-brand-gray">Contáctenos para evaluar sus necesidades y desarrollar un plan a medida.</p>
+          </div>
+          <div className="text-center">
+            <a href="#contacto" className="btn-primary px-8 py-4 rounded-xl font-bold shadow-green hover:shadow-none inline-flex items-center gap-2 whitespace-nowrap">
+              Solicitar Cotización <i className="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default Services;

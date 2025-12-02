@@ -1,126 +1,132 @@
 'use client'
 
-import { Home, Truck, Filter, Factory, CheckCircle } from 'lucide-react'
+import { useEffect } from 'react'
 import Link from 'next/link'
 
 export default function ProcessSection() {
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active')
+        }
+      })
+    }, { threshold: 0.1 })
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+
+    return () => observer.disconnect()
+  }, [])
+
   const steps = [
     {
-      icon: Home,
-      title: 'Separación en Fuente',
-      description: 'Los usuarios separan los residuos aprovechables en sus hogares o empresas.',
-      details: ['Educación previa', 'Contenedores específicos', 'Calendarización']
+      icon: 'fas fa-clipboard-list',
+      title: 'Diagnóstico y Consultoría',
+      description: 'Antes de recoger la primera bolsa, entendemos tu operación. Realizamos un aforo inicial para identificar tipos de residuos, volúmenes y puntos críticos.',
+      items: ['Plan de Gestión Integral (PGIRS)', 'Capacitación al personal']
     },
     {
-      icon: Truck,
-      title: 'Recolección Selectiva',
-      description: 'Nuestros vehículos especializados recolectan los materiales de forma programada.',
-      details: ['Rutas optimizadas', 'Personal capacitado', 'Registro digital']
+      icon: 'fas fa-truck-fast',
+      title: 'Logística y Recolección',
+      description: 'Ejecución operativa con nuestra flota especializada. Garantizamos frecuencias fijas y personal uniformado que cumple con protocolos de seguridad.',
+      items: ['Rutas optimizadas por GPS', 'Manifiesto de recolección digital']
     },
     {
-      icon: Filter,
-      title: 'Clasificación ECA',
-      description: 'En nuestra estación clasificamos los materiales por tipo y calidad.',
-      details: ['Proceso manual y mecánico', 'Control de calidad', 'Pesaje y registro']
+      icon: 'fas fa-hands-holding-circle',
+      title: 'Clasificación Técnica (ECA)',
+      description: 'El material ingresa a nuestra Estación de Clasificación. Operarios expertos separan, limpian y compactan los residuos según sus propiedades.',
+      items: ['Pesaje electrónico certificado', 'Segregación por polímeros y fibras']
     },
     {
-      icon: Factory,
-      title: 'Procesamiento',
-      description: 'Preparación de materiales para su comercialización y transformación.',
-      details: ['Limpieza y compactación', 'Empaque y almacenamiento', 'Certificación']
+      icon: 'fas fa-industry',
+      title: 'Valorización y Cierre de Ciclo',
+      description: 'Transformamos el residuo en materia prima secundaria. Comercializamos los materiales compactados directamente con industrias transformadoras.',
+      items: ['Reincorporación a cadena productiva', 'Reducción de huella de carbono']
     },
     {
-      icon: CheckCircle,
-      title: 'Comercialización',
-      description: 'Venta a industrias transformadoras y cierre del ciclo de reciclaje.',
-      details: ['Mercados especializados', 'Precios competitivos', 'Reporte de impacto']
+      icon: 'fas fa-certificate',
+      title: 'Certificación Ambiental',
+      description: 'El ciclo finaliza con la emisión de tu Certificado de Aprovechamiento, un documento legal que valida tu cumplimiento normativo.',
+      items: ['Documento legal válido', 'Respaldo de indicadores de sostenibilidad']
     }
   ]
 
-  return (
-    <section id="proceso" className="py-20 bg-white">
-      <div className="container-eco">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-eco-verde-800 mb-4">
-            Nuestro Proceso
-          </h2>
-          <p className="text-xl text-eco-neutral-gris max-w-3xl mx-auto">
-            Un sistema integral que garantiza el máximo aprovechamiento de los residuos, desde la fuente hasta su transformación final.
-          </p>
-        </div>
+  const stepTitles = [
+    'Entregables Clave:',
+    'Características:',
+    'Proceso Técnico:',
+    'Economía Circular:',
+    'Certificación:'
+  ]
 
-        <div className="relative">
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-eco-verde-200 transform -translate-x-1/2 hidden md:block"></div>
-          
-          <div className="space-y-12">
-            {steps.map((step, index) => (
-              <div key={index} className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} ${index % 2 === 0 ? 'md:text-right' : ''}`}>
-                  <div className={`bg-eco-verde-50 rounded-2xl p-6 max-w-lg ${index % 2 === 0 ? 'md:ml-auto' : ''}`}>
-                    <h3 className="text-2xl font-bold text-eco-verde-800 mb-3">
-                      {step.title}
-                    </h3>
-                    <p className="text-eco-neutral-gris mb-4 leading-relaxed">
+  return (
+    <section id="proceso" className="py-24 bg-white relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8 timeline-container">
+        
+        <div className="timeline-line"></div>
+        <div className="timeline-progress"></div>
+
+        <div className="space-y-24 relative z-10">
+
+          {steps.map((step, index) => (
+            <div key={index} className={`relative flex flex-col md:flex-row items-center reveal group ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+              {/* Círculo con ícono */}
+              <div className={`absolute left-[14px] md:left-1/2 transform md:-translate-x-1/2 -translate-y-1/2 top-0 md:top-1/2 flex items-center justify-center z-20 w-16 h-16 
+                ${index === 0 ? 'bg-brand-green text-white' : 'bg-white text-brand-green'} 
+                rounded-full shadow-green border-[6px] border-white group-hover:bg-brand-green group-hover:text-white transition-colors duration-300`}>
+                <i className={`${step.icon} text-2xl`}></i>
+              </div>
+
+              {/* Contenido de la tarjeta */}
+              <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'} w-full pl-16 md:pl-0 ${index % 2 === 1 ? 'md:text-right' : ''}`}>
+                <div className="step-card p-8 md:p-10">
+                  <span className="step-number-bg">0{index + 1}</span>
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-bold text-brand-dark mb-3">{step.title}</h3>
+                    <p className="text-brand-gray mb-6 leading-relaxed">
                       {step.description}
                     </p>
-                    <ul className="space-y-2">
-                      {step.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="flex items-center text-sm text-eco-verde-700">
-                          {index % 2 === 0 && <div className="w-2 h-2 bg-eco-verde-500 rounded-full mr-3"></div>}
-                          {detail}
-                          {index % 2 !== 0 && <div className="w-2 h-2 bg-eco-verde-500 rounded-full ml-3"></div>}
-                        </li>
-                      ))}
-                    </ul>
+                    
+                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                      <h4 className="text-xs font-bold text-brand-green uppercase mb-2">{stepTitles[index]}</h4>
+                      <ul className={`text-sm text-brand-dark space-y-2 ${index % 2 === 1 ? 'md:text-right' : ''}`}>
+                        {step.items.map((item, idx) => (
+                          <li key={idx} className="flex items-center gap-2">
+                            <i className="fas fa-circle-check text-brand-green"></i>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-                
-                <div className="flex-shrink-0 relative z-10">
-                  <div className="w-16 h-16 bg-gradient-to-br from-eco-verde-600 to-eco-verde-500 rounded-full flex items-center justify-center shadow-lg">
-                    <step.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-eco-verde-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    {index + 1}
-                  </div>
-                </div>
-                
-                <div className="flex-1 hidden md:block"></div>
               </div>
-            ))}
-          </div>
-        </div>
+              
+              {/* Espacio vacío para la otra mitad en desktop */}
+              <div className="md:w-1/2 hidden md:block"></div>
+            </div>
+          ))}
 
-        <div className="mt-16 bg-gradient-to-r from-eco-verde-600 to-eco-verde-700 rounded-2xl p-8 text-white text-center">
-          <h3 className="text-2xl font-bold mb-4">
-            Ciclo de Economía Circular
-          </h3>
-          <p className="text-eco-verde-100 text-lg max-w-2xl mx-auto mb-6">
-            Cerramos el ciclo completo del reciclaje, transformando residuos en recursos valiosos y contribuyendo a la sostenibilidad ambiental de nuestra región.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-eco-verde-300">95%</div>
-              <div className="text-eco-verde-200">Material Aprovechado</div>
+          <div className="reveal pt-16 flex flex-col items-center justify-center text-center relative z-20">
+            <div className="w-24 h-24 bg-brand-dark rounded-full flex items-center justify-center text-brand-green text-4xl shadow-2xl mb-8 border-4 border-white animate-float-medium">
+              <i className="fas fa-certificate"></i>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-eco-verde-300">24h</div>
-              <div className="text-eco-verde-200">Tiempo Procesamiento</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-eco-verde-300">100%</div>
-              <div className="text-eco-verde-200">Trazabilidad</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-eco-verde-300">0%</div>
-              <div className="text-eco-verde-200">Vertimiento</div>
+            
+            <h3 className="text-3xl font-bold text-brand-dark mb-4">Certificación Ambiental</h3>
+            <p className="text-brand-gray max-w-xl mb-8 text-lg">
+              El ciclo finaliza con la emisión de tu <strong>Certificado de Aprovechamiento</strong>, un documento legal que valida tu cumplimiento normativo y respalda tus indicadores de sostenibilidad.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/contacto" className="btn-primary px-10 py-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-green hover:shadow-lg transition-all">
+                Solicitar Recolección <i className="fas fa-arrow-right"></i>
+              </Link>
+              <button className="px-10 py-4 bg-white border border-gray-200 text-brand-dark font-bold rounded-xl hover:border-brand-green hover:text-brand-green transition-colors flex items-center justify-center gap-2">
+                <i className="fas fa-download"></i> Ver Ejemplo de Certificado
+              </button>
             </div>
           </div>
-          
-          <div className="mt-8">
-            <Link href="/proceso" className="btn-secondary px-6 py-3 rounded-full font-semibold inline-block">
-              Conoce Nuestro Proceso Completo
-            </Link>
-          </div>
+
         </div>
       </div>
     </section>

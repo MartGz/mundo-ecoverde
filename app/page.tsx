@@ -1,19 +1,23 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import HeroSection from '@/components/HeroCarousel'
+import HeroSection from '@/components/HeroSection'
 import AboutSection from '@/components/AboutSection'
 import ServicesSection from '@/components/ServicesSection'
 import ProcessSection from '@/components/ProcessSection'
 import ContactSection from '@/components/ContactSection'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import { JSX } from 'react'
-import HeroCarousel from '@/components/HeroCarousel'
+import { Metadata } from 'next'
 
-export default function Home(): JSX.Element {
+export const metadata: Metadata = {
+  title: 'Mundo Eco Verde | Transformando el Futuro',
+  description: 'Centro de reciclaje certificado ECA. Gestión integral de residuos en Cartagena.',
+}
+
+export default function Home() {
   return (
     <>
       <Navbar />
-      <HeroCarousel />
+      <HeroSection />
       <AboutSection />
       <ServicesSection />
       <ProcessSection />

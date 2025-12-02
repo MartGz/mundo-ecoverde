@@ -1,73 +1,82 @@
-import Link from 'next/link'
-import { Recycle, Mail, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react'
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-eco-verde-900 text-white py-12">
-      <div className="container-eco">
-        <div className="grid md:grid-cols-3 gap-8 mb-8"> {/* Cambiado de 4 a 3 columnas */}
-          <div className="md:col-span-1">
-            <div className="flex items-center space-x-3 mb-4">
-              <Recycle className="w-8 h-8 text-eco-verde-300" />
-              <span className="text-xl font-bold">Mundo Eco Verde</span>
+    <footer className="bg-white border-t border-gray-100 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="col-span-1 md:col-span-2">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-24 h-24 relative flex items-center justify-center">
+                <Image
+                  src="/images/logos/logo.png"
+                  alt="MundoEcoVerde Logo"
+                  width={96}
+                  height={96}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="font-bold text-3xl text-brand-dark">
+                Mundo Eco Verde
+              </span>
             </div>
-            <p className="text-eco-verde-200 mb-4">
-              Asociación sin ánimo de lucro dedicada al aprovechamiento de residuos.
+            <p className="text-brand-gray text-sm leading-relaxed max-w-sm">
+              Comprometidos con el desarrollo sostenible y la economía circular.
+              Transformamos residuos en oportunidades para un futuro más limpio.
             </p>
-            {/* SOLO UN CONTACTO EN EL FOOTER */}
-            <div className="flex items-center space-x-2 text-eco-verde-200">
-              <Mail className="w-4 h-4" />
-              <span className="text-sm">asociacionmundoecoverde@gmail.com</span>
-            </div>
           </div>
-          
+
           <div>
-            <h4 className="font-bold text-lg mb-4">Enlaces</h4>
-            <ul className="space-y-2 text-eco-verde-200">
-              <li><Link href="/" className="hover:text-white transition">Inicio</Link></li>
-              <li><Link href="/nosotros" className="hover:text-white transition">Nosotros</Link></li>
-              <li><Link href="/servicios" className="hover:text-white transition">Servicios</Link></li>
-              <li><Link href="/proceso" className="hover:text-white transition">Proceso</Link></li>
-              <li><Link href="/contacto" className="hover:text-white transition">Contacto</Link></li>
+            <h4 className="font-bold text-brand-dark mb-4">Empresa</h4>
+            <ul className="space-y-2 text-sm text-brand-gray">
+              <li>
+                <Link
+                  href="/nosotros"
+                  className="hover:text-brand-green transition-colors"
+                >
+                  Nosotros
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/servicios"
+                  className="hover:text-brand-green transition-colors"
+                >
+                  Servicios
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/proceso"
+                  className="hover:text-brand-green transition-colors"
+                >
+                  Proceso
+                </Link>
+              </li>
             </ul>
           </div>
-          
+
           <div>
-            <h4 className="font-bold text-lg mb-4">Síguenos</h4>
-            <div className="flex space-x-4">
-              <a 
-                href="https://facebook.com/mundoecoverde" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-eco-verde-800 rounded-full flex items-center justify-center hover:bg-eco-verde-700 transition"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://instagram.com/mundoecoverde" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-eco-verde-800 rounded-full flex items-center justify-center hover:bg-eco-verde-700 transition"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://linkedin.com/company/mundoecoverde" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-eco-verde-800 rounded-full flex items-center justify-center hover:bg-eco-verde-700 transition"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
+            <h4 className="font-bold text-brand-dark mb-4">Contacto</h4>
+            <ul className="space-y-2 text-sm text-brand-gray">
+              <li className="flex items-center gap-2">
+                <i className="fas fa-phone text-brand-green"></i>
+                +57 371 886 6549
+              </li>
+              <li className="flex items-center gap-2">
+                <i className="fas fa-envelope text-brand-green"></i>
+                asociacionmundoecoverde@gmail.com
+              </li>
+            </ul>
           </div>
         </div>
-        
-        <div className="border-t border-eco-verde-800 pt-8 text-center text-eco-verde-300">
-          <p>&copy; {new Date().getFullYear()} Asociación Mundo Ecoverde. Todos los derechos reservados.</p>
-          <p className="mt-2 text-sm">ECA - Estación de Clasificación y Aprovechamiento</p>
+
+        <div className="border-t border-gray-100 pt-8 text-center text-sm text-gray-400">
+          © {new Date().getFullYear()} Mundo Eco Verde S.A.S. Todos los derechos
+          reservados.
         </div>
       </div>
     </footer>
-  )
+  );
 }

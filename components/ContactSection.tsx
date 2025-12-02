@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle, Loader } from 'lucide-react'
+import { useReveal } from '@/hooks/useReveal'
 
 export default function ContactSection() {
+  useReveal()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,18 +12,14 @@ export default function ContactSection() {
     service: '',
     message: ''
   })
-  
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-  const handleSubmit = async () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    
     if (!formData.name || !formData.email || !formData.phone || !formData.message) {
-      alert('Por favor completa todos los campos obligatorios (*)');
-      return;
+      alert('Por favor completa todos los campos obligatorios (*)')
+      return
     }
-
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
 
     const emailBody = `
 Nuevo mensaje de contacto - Mundo Eco Verde
@@ -41,20 +38,15 @@ ${formData.message}
     window.location.href = mailtoLink
     
     setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmitStatus('success')
-      
-      setTimeout(() => {
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          service: '',
-          message: ''
-        })
-        setSubmitStatus('idle')
-      }, 2000)
-    }, 1000)
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: ''
+      })
+      alert('¡Mensaje enviado! Te contactaremos pronto 🎉')
+    }, 100)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -64,227 +56,238 @@ ${formData.message}
     })
   }
 
-  // SOLO UN CONTACTO PRINCIPAL
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: 'Teléfono / WhatsApp',
-      content: '+57 371 886 6549',
-      link: 'https://wa.me/573718866549',
-      color: 'from-eco-verde-500 to-eco-verde-600'
-    },
-    {
-      icon: Mail,
-      title: 'Email',
-      content: 'asociacionmundoecoverde@gmail.com',
-      link: 'mailto:asociacionmundoecoverde@gmail.com',
-      color: 'from-eco-verde-500 to-eco-verde-600'
-    },
-    {
-      icon: MapPin,
-      title: 'Dirección',
-      content: 'Barrio Henequén, Calle Principal Mza D Lte 3, Cartagena',
-      link: 'https://maps.google.com/?q=Barrio+Henequén+Cartagena',
-      color: 'from-eco-verde-500 to-eco-verde-600'
-    }
-  ]
-
   return (
-    <section id="contacto" className="relative py-20 bg-eco-neutral-beige overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-eco-verde-300 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-eco-verde-200 rounded-full blur-3xl"></div>
+    <section id="contacto" className="py-24 bg-brand-light relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-brand-green/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-50 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-eco-verde-800">
-            ¡Hablemos! 💚
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16 reveal">
+          <h2 className="inline-flex items-center gap-2 text-3xl md:text-5xl font-extrabold text-brand-dark mb-4">
+            ¡Hablemos! <i className="fas fa-heart text-brand-green animate-pulse"></i>
           </h2>
-          <div className="divider-eco mb-6"></div>
-          <p className="text-xl text-eco-neutral-gris max-w-3xl mx-auto leading-relaxed">
-            Estamos listos para atender tus necesidades en gestión de residuos. 
-            <span className="block mt-2 text-eco-verde-700 font-semibold">¡Contáctanos y construyamos un futuro más verde juntos! 🌱</span>
+          <div className="w-24 h-1.5 bg-brand-green mx-auto rounded-full mb-6"></div>
+          <p className="text-brand-gray text-lg max-w-2xl mx-auto leading-relaxed">
+            Estamos listos para atender tus necesidades en gestión de residuos.
+            <br />
+            <span className="font-bold text-brand-green">¡Contáctanos y construyamos un futuro más verde juntos! 🌱</span>
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-          {/* Contact Info Cards */}
-          <div className="space-y-6">
-            <h3 className="text-3xl font-bold mb-8 text-eco-verde-800 flex items-center">
-              <span className="w-2 h-10 bg-eco-verde-500 rounded-full mr-4"></span>
-              Información de Contacto
-            </h3>
-            
-            <div className="grid gap-4">
-              {contactInfo.map((item, index) => (
-                <div 
-                  key={index}
-                  className="group card-eco p-6 rounded-2xl hover:shadow-eco-lg transition-all duration-300 border-2 border-eco-verde-100 hover:border-eco-verde-400 hover:scale-105"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className={`w-14 h-14 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      <item.icon className="w-7 h-7 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-lg mb-2 text-eco-verde-800">{item.title}</h4>
-                      {item.link ? (
-                        <a 
-                          href={item.link}
-                          target={item.link.startsWith('http') ? '_blank' : undefined}
-                          rel={item.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          className="text-eco-verde-600 hover:text-eco-verde-800 transition-colors text-sm leading-relaxed block link-eco"
-                        >
-                          {item.content}
-                        </a>
-                      ) : (
-                        <p className="text-eco-verde-600 text-sm leading-relaxed">{item.content}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="lg:col-span-5 space-y-8 reveal">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1.5 h-8 bg-brand-green rounded-full"></div>
+              <h3 className="text-2xl font-bold text-brand-dark">Información de Contacto</h3>
             </div>
 
-            {/* Horarios */}
-            <div className="card-eco rounded-3xl p-8 border-2 border-eco-verde-200 mt-8">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-eco-verde-400 to-eco-verde-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Clock className="w-10 h-10 text-white" />
+            <div className="space-y-4">
+              <a href="https://wa.me/573718866549" target="_blank" rel="noopener noreferrer"
+                className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-green hover:border-brand-green/30 transition-all duration-300 group">
+                <div className="w-12 h-12 bg-green-50 text-brand-green rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-brand-green group-hover:text-white transition-colors">
+                  <i className="fab fa-whatsapp text-2xl"></i>
                 </div>
-                <h4 className="font-bold text-2xl mb-4 text-eco-verde-800">🕒 Horarios de Atención</h4>
-                <div className="space-y-2 text-eco-verde-700">
-                  <p><strong>Lunes a Viernes:</strong> 7:00 AM - 5:00 PM</p>
-                  <p><strong>Sábados:</strong> 7:00 AM - 12:00 PM</p>
-                  <p><strong>Domingos:</strong> Cerrado</p>
+                <div>
+                  <p className="text-xs font-bold text-brand-gray uppercase tracking-wider mb-1">Teléfono / WhatsApp</p>
+                  <p className="text-lg font-bold text-brand-dark group-hover:text-brand-green transition-colors">
+                    +57 371 886 6549
+                  </p>
                 </div>
+              </a>
+
+              <a href="mailto:asociacionmundoecoverde@gmail.com"
+                className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-green hover:border-brand-green/30 transition-all duration-300 group">
+                <div className="w-12 h-12 bg-green-50 text-brand-green rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-brand-green group-hover:text-white transition-colors">
+                  <i className="fas fa-envelope text-2xl"></i>
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-brand-gray uppercase tracking-wider mb-1">Email</p>
+                  <p className="text-lg font-bold text-brand-dark break-all group-hover:text-brand-green transition-colors">
+                    asociacionmundoecoverde@gmail.com
+                  </p>
+                </div>
+              </a>
+
+              <a href="https://maps.google.com/?q=Barrio+Henequén+Cartagena" target="_blank" rel="noopener noreferrer"
+                className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-green hover:border-brand-green/30 transition-all duration-300 group">
+                <div className="w-12 h-12 bg-green-50 text-brand-green rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-brand-green group-hover:text-white transition-colors">
+                  <i className="fas fa-map-location-dot text-2xl"></i>
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-brand-gray uppercase tracking-wider mb-1">Dirección</p>
+                  <p className="text-lg font-bold text-brand-dark leading-snug group-hover:text-brand-green transition-colors">
+                    Barrio Henequén, Calle Principal Mza D Lte 3, Cartagena
+                  </p>
+                </div>
+              </a>
+            </div>
+
+            <div className="bg-brand-green/5 rounded-3xl p-8 border border-brand-green/10 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-brand-green/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <div className="w-10 h-10 bg-brand-green text-white rounded-full flex items-center justify-center shadow-lg">
+                  <i className="fas fa-clock"></i>
+                </div>
+                <h4 className="text-xl font-bold text-brand-dark">Horarios de Atención</h4>
               </div>
+              <ul className="space-y-3 relative z-10">
+                <li className="flex justify-between items-center text-brand-gray pb-2 border-b border-brand-green/10">
+                  <span className="font-medium">Lunes a Viernes</span>
+                  <span className="font-bold text-brand-dark bg-white px-3 py-1 rounded-lg text-sm shadow-sm">7:00 AM - 5:00 PM</span>
+                </li>
+                <li className="flex justify-between items-center text-brand-gray pb-2 border-b border-brand-green/10">
+                  <span className="font-medium">Sábados</span>
+                  <span className="font-bold text-brand-dark bg-white px-3 py-1 rounded-lg text-sm shadow-sm">7:00 AM - 12:00 PM</span>
+                </li>
+                <li className="flex justify-between items-center text-brand-gray">
+                  <span className="font-medium">Domingos</span>
+                  <span className="font-bold text-red-500 bg-red-50 px-3 py-1 rounded-lg text-sm">Cerrado</span>
+                </li>
+              </ul>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="card rounded-3xl p-8 md:p-10 shadow-eco-lg">
-            <h3 className="text-3xl font-bold mb-2 text-eco-verde-800 flex items-center">
-              <Send className="w-8 h-8 mr-3 text-eco-verde-500" />
-              Envíanos un Mensaje
-            </h3>
-            <p className="text-eco-neutral-gris mb-8">Completa el formulario y nos pondremos en contacto contigo</p>
-            
-            {submitStatus === 'success' && (
-              <div className="mb-6 bg-eco-verde-50 border-2 border-eco-verde-500 rounded-xl p-4 flex items-center space-x-3 animate-fade-in">
-                <CheckCircle className="w-6 h-6 text-eco-verde-600 flex-shrink-0" />
-                <p className="text-eco-verde-800 font-semibold">¡Mensaje enviado! Te contactaremos pronto 🎉</p>
-              </div>
-            )}
-            
-            <div className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-bold text-eco-neutral-gris mb-2">
-                    Nombre Completo *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3 border-2 border-eco-neutral-gris-claro rounded-xl focus:ring-2 focus:ring-eco-verde-500 focus:border-eco-verde-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    placeholder="Juan Pérez"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-bold text-eco-neutral-gris mb-2">
-                    Teléfono *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3 border-2 border-eco-neutral-gris-claro rounded-xl focus:ring-2 focus:ring-eco-verde-500 focus:border-eco-verde-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    placeholder="+57 300 123 4567"
-                  />
-                </div>
+          <div className="lg:col-span-7 reveal" style={{ transitionDelay: '200ms' }}>
+            <div className="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 p-8 lg:p-12 relative">
+              <div className="absolute top-8 right-8 text-brand-green/10 hidden md:block">
+                <i className="fas fa-paper-plane text-8xl transform -rotate-12"></i>
               </div>
 
-              <div>
-                <label className="block text-sm font-bold text-eco-neutral-gris mb-2">
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  disabled={isSubmitting}
-                  className="w-full px-4 py-3 border-2 border-eco-neutral-gris-claro rounded-xl focus:ring-2 focus:ring-eco-verde-500 focus:border-eco-verde-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  placeholder="tu.email@ejemplo.com"
-                />
+              <div className="mb-8 relative z-10">
+                <h3 className="text-3xl font-bold text-brand-dark mb-2 flex items-center gap-3">
+                  <i className="fas fa-paper-plane text-brand-green"></i> Envíanos un Mensaje
+                </h3>
+                <p className="text-brand-gray">Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
               </div>
 
-              <div>
-                <label className="block text-sm font-bold text-eco-neutral-gris mb-2">
-                  Servicio de Interés
-                </label>
-                <select
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  disabled={isSubmitting}
-                  className="w-full px-4 py-3 border-2 border-eco-neutral-gris-claro rounded-xl focus:ring-2 focus:ring-eco-verde-500 focus:border-eco-verde-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="nombre" className="text-sm font-bold text-brand-dark ml-1">
+                      Nombre Completo <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                        <i className="fas fa-user"></i>
+                      </div>
+                      <input
+                        type="text"
+                        id="nombre"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        placeholder="Juan Pérez"
+                        className="w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-brand-green focus:ring-4 focus:ring-brand-green/10 outline-none transition-all font-medium text-brand-dark placeholder-gray-400"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="telefono" className="text-sm font-bold text-brand-dark ml-1">
+                      Teléfono <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                        <i className="fas fa-mobile-alt"></i>
+                      </div>
+                      <input
+                        type="tel"
+                        id="telefono"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                        placeholder="+57 300 123 4567"
+                        className="w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-brand-green focus:ring-4 focus:ring-brand-green/10 outline-none transition-all font-medium text-brand-dark placeholder-gray-400"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-bold text-brand-dark ml-1">
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                      <i className="fas fa-envelope"></i>
+                    </div>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="tu.email@ejemplo.com"
+                      className="w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-brand-green focus:ring-4 focus:ring-brand-green/10 outline-none transition-all font-medium text-brand-dark placeholder-gray-400"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="servicio" className="text-sm font-bold text-brand-dark ml-1">
+                    Servicio de Interés
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                      <i className="fas fa-list-check"></i>
+                    </div>
+                    <select
+                      id="servicio"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className="w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-brand-green focus:ring-4 focus:ring-brand-green/10 outline-none transition-all font-medium text-brand-dark appearance-none cursor-pointer"
+                    >
+                      <option value="">Selecciona una opción</option>
+                      <option value="Recolección Selectiva">♻️ Recolección Selectiva</option>
+                      <option value="Clasificación">📦 Clasificación y Aprovechamiento</option>
+                      <option value="Gestión Integral">🏢 Gestión de Residuos</option>
+                      <option value="Comercialización">💼 Comercialización</option>
+                      <option value="Educación">🎓 Educación Ambiental</option>
+                      <option value="Limpieza">🧹 Limpieza Especial</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
+                      <i className="fas fa-chevron-down text-xs"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="mensaje" className="text-sm font-bold text-brand-dark ml-1">
+                    Mensaje <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <textarea
+                      id="mensaje"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={4}
+                      placeholder="Cuéntanos cómo podemos ayudarte..."
+                      className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-brand-green focus:ring-4 focus:ring-brand-green/10 outline-none transition-all font-medium text-brand-dark placeholder-gray-400 resize-none"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full btn-primary py-5 rounded-xl font-bold text-lg shadow-green hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 group"
                 >
-                  <option value="">Selecciona un servicio</option>
-                  <option value="recoleccion">♻️ Recolección Selectiva</option>
-                  <option value="clasificacion">📦 Clasificación y Aprovechamiento</option>
-                  <option value="gestion">🗑️ Gestión de Residuos</option>
-                  <option value="comercializacion">💼 Comercialización</option>
-                  <option value="educacion">📚 Educación Ambiental</option>
-                  <option value="limpieza">🧹 Limpieza Especial</option>
-                </select>
-              </div>
+                  <i className="fas fa-paper-plane group-hover:rotate-12 transition-transform duration-300"></i>
+                  Enviar Mensaje
+                </button>
 
-              <div>
-                <label className="block text-sm font-bold text-eco-neutral-gris mb-2">
-                  Mensaje *
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  disabled={isSubmitting}
-                  rows={5}
-                  className="w-full px-4 py-3 border-2 border-eco-neutral-gris-claro rounded-xl focus:ring-2 focus:ring-eco-verde-500 focus:border-eco-verde-500 transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed"
-                  placeholder="Cuéntanos cómo podemos ayudarte..."
-                ></textarea>
-              </div>
-
-              <button
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-                className="btn-primary w-full py-4 px-6 rounded-xl font-bold text-lg hover:scale-105 transition-all shadow-eco hover:shadow-eco-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 group"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader className="w-6 h-6 animate-spin" />
-                    <span>Enviando...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                    <span>Enviar Mensaje</span>
-                  </>
-                )}
-              </button>
-
-              <p className="text-sm text-eco-neutral-gris text-center">
-                * Campos obligatorios | Tus datos están protegidos 🔒
-              </p>
+                <p className="text-center text-xs text-brand-gray mt-4 flex items-center justify-center gap-1">
+                  <i className="fas fa-lock text-brand-green"></i>
+                  * Campos obligatorios | Tus datos están protegidos
+                </p>
+              </form>
             </div>
           </div>
         </div>
