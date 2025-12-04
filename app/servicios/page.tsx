@@ -1,13 +1,15 @@
-// app/servicios/page.tsx
 'use client'
 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import ContactModal from '@/components/ContactModal'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function ServiciosPage() {
+  const [showModal, setShowModal] = useState(false)
+
   useEffect(() => {
     // Animaciones Reveal
     const observer = new IntersectionObserver((entries) => {
@@ -88,15 +90,15 @@ export default function ServiciosPage() {
       <Navbar />
       
       {/* Hero Section para Servicios */}
-      <section className="pt-40 pb-20 relative overflow-hidden bg-brand-light">
+      <section className="pt-32 lg:pt-40 pb-12 lg:pb-20 relative overflow-hidden bg-brand-light">
         <div className="hero-blob bg-blue-100 w-[500px] h-[500px] top-[-100px] right-[-100px] rounded-full animate-float-slow"></div>
         <div className="hero-blob bg-brand-green w-[300px] h-[300px] bottom-0 left-0 rounded-full animate-float-medium"></div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center reveal relative z-10">
+        <div className="container-eco text-center reveal relative z-10">
           <div className="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-wider text-brand-green uppercase bg-green-100 rounded-full">
             Nuestros Servicios
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-brand-dark mb-6">
+          <h1 className="text-3xl lg:text-4xl xl:text-6xl font-extrabold text-brand-dark mb-6">
             Soluciones para un <br /> <span className="text-gradient">Mundo Más Limpio</span>
           </h1>
           <p className="text-lg text-brand-gray max-w-2xl mx-auto leading-relaxed">
@@ -106,8 +108,8 @@ export default function ServiciosPage() {
       </section>
 
       {/* Servicios Detallados */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-12 lg:py-24 bg-white">
+        <div className="container-eco">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {serviciosDetallados.map((service, index) => (
               <div 
@@ -139,8 +141,8 @@ export default function ServiciosPage() {
       </section>
 
       {/* Sectores que Atendemos */}
-      <section className="py-20 bg-brand-light">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-12 lg:py-20 bg-brand-light">
+        <div className="container-eco">
           <div className="text-center mb-12 reveal">
             <h2 className="text-3xl font-bold text-brand-dark">Sectores que Atendemos</h2>
             <div className="w-20 h-1 bg-brand-green mx-auto mt-4 rounded-full"></div>
@@ -161,8 +163,8 @@ export default function ServiciosPage() {
       </section>
 
       {/* CTA Final */}
-      <section className="py-20 bg-white">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8 reveal">
+      <section className="py-12 lg:py-20 bg-white">
+        <div className="container-eco reveal">
           <div className="bg-brand-dark rounded-[2.5rem] p-10 md:p-16 text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-green opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
             
@@ -170,12 +172,22 @@ export default function ServiciosPage() {
             <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto relative z-10">
               Contáctanos hoy mismo para una evaluación gratuita y descubre cuánto puedes ahorrar y contribuir al planeta.
             </p>
-            <Link href="/contacto" className="btn-primary px-10 py-4 rounded-xl font-bold text-lg shadow-green hover:shadow-white inline-flex items-center gap-3 relative z-10">
+            <button 
+              onClick={() => setShowModal(true)}
+              className="btn-primary px-10 py-4 rounded-xl font-bold text-lg shadow-green hover:shadow-white inline-flex items-center gap-3 relative z-10"
+            >
               Solicitar Cotización <i className="fas fa-arrow-right"></i>
-            </Link>
+            </button>
           </div>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={showModal} 
+        onClose={() => setShowModal(false)} 
+        serviceType="cotizacion" 
+      />
 
       <Footer />
       <WhatsAppButton />

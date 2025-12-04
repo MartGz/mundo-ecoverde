@@ -1,13 +1,16 @@
-// app/proceso/page.tsx
-"use client";
+'use client'
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import Link from "next/link";
-import { useEffect } from "react";
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import WhatsAppButton from '@/components/WhatsAppButton'
+import ContactModal from '@/components/ContactModal'
+import { useState } from 'react'
+import { useEffect } from "react"
 
 export default function ProcesoPage() {
+  const [showModal, setShowModal] = useState(false)
+  const [modalType, setModalType] = useState<'cotizacion' | 'recoleccion' | 'proceso'>('cotizacion')
+
   useEffect(() => {
     // Animaciones Reveal
     const observer = new IntersectionObserver(
@@ -25,6 +28,11 @@ export default function ProcesoPage() {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleOpenModal = (type: 'cotizacion' | 'recoleccion' | 'proceso') => {
+    setModalType(type)
+    setShowModal(true)
+  }
 
   const steps = [
     {
@@ -105,11 +113,11 @@ export default function ProcesoPage() {
       <Navbar />
 
       {/* Hero Section para Proceso */}
-      <section className="pt-40 pb-24 relative overflow-hidden bg-brand-light">
+      <section className="pt-32 lg:pt-40 pb-20 lg:pb-24 relative overflow-hidden bg-brand-light">
         <div className="hero-blob bg-brand-green w-[600px] h-[600px] top-[-100px] left-[-100px] rounded-full animate-float-slow"></div>
         <div className="hero-blob bg-blue-100 w-[400px] h-[400px] bottom-0 right-0 rounded-full animate-float-medium"></div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center reveal">
+        <div className="container-eco relative z-10 text-center reveal">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 mb-6 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
             <span className="text-xs font-bold text-brand-gray uppercase tracking-widest">
@@ -117,7 +125,7 @@ export default function ProcesoPage() {
             </span>
           </div>
 
-          <h1 className="text-4xl lg:text-6xl font-extrabold text-brand-dark mb-6 leading-tight">
+          <h1 className="text-3xl lg:text-4xl xl:text-6xl font-extrabold text-brand-dark mb-6 leading-tight">
             Trazabilidad completa <br /> desde la{" "}
             <span className="text-gradient">Fuente</span> hasta el{" "}
             <span className="text-gradient">Destino</span>
@@ -132,12 +140,12 @@ export default function ProcesoPage() {
       </section>
 
       {/* Proceso Detallado con Línea de Tiempo */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 timeline-container">
+      <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+        <div className="container-eco timeline-container">
           <div className="timeline-line"></div>
           <div className="timeline-progress"></div>
 
-          <div className="space-y-24 relative z-10">
+          <div className="space-y-16 lg:space-y-24 relative z-10">
             {steps.map((step, index) => (
               <div
                 key={index}
@@ -147,32 +155,32 @@ export default function ProcesoPage() {
               >
                 {/* Círculo con ícono */}
                 <div
-                  className={`absolute left-8 md:left-1/2 transform md:-translate-x-1/2 -translate-y-1/2 top-0 md:top-1/2 flex items-center justify-center z-20 w-16 h-16 
+                  className={`absolute left-8 md:left-1/2 transform md:-translate-x-1/2 -translate-y-1/2 top-0 md:top-1/2 flex items-center justify-center z-20 w-12 h-12 lg:w-16 lg:h-16 
                   ${
                     index === 0
                       ? "bg-brand-green text-white"
                       : "bg-white text-brand-green"
                   } 
-                  rounded-full shadow-green border-[6px] border-white group-hover:bg-brand-green group-hover:text-white transition-colors duration-300`}
+                  rounded-full shadow-green border-4 lg:border-[6px] border-white group-hover:bg-brand-green group-hover:text-white transition-colors duration-300`}
                 >
-                  <i className={`${step.icono} text-2xl`}></i>
+                  <i className={`${step.icono} text-lg lg:text-2xl`}></i>
                 </div>
 
                 {/* Contenido de la tarjeta */}
                 <div
                   className={`md:w-1/2 ${
-                    index % 2 === 0 ? "md:pr-16" : "md:pl-16"
+                    index % 2 === 0 ? "md:pr-8 lg:pr-16" : "md:pl-8 lg:pl-16"
                   } w-full pl-16 md:pl-0 ${
                     index % 2 === 1 ? "md:text-right" : ""
                   }`}
                 >
-                  <div className="step-card p-8 md:p-10">
+                  <div className="step-card p-6 lg:p-8 xl:p-10">
                     <span className="step-number-bg">{step.numero}</span>
                     <div className="relative z-10">
-                      <h3 className="text-2xl font-bold text-brand-dark mb-3">
+                      <h3 className="text-xl lg:text-2xl font-bold text-brand-dark mb-3">
                         {step.titulo}
                       </h3>
-                      <p className="text-brand-gray mb-6 leading-relaxed">
+                      <p className="text-brand-gray mb-6 leading-relaxed text-sm lg:text-base">
                         {step.descripcion}
                       </p>
 
@@ -209,15 +217,15 @@ export default function ProcesoPage() {
             ))}
 
             {/* Certificación */}
-            <div className="reveal pt-16 flex flex-col items-center justify-center text-center relative z-20">
-              <div className="w-24 h-24 bg-brand-dark rounded-full flex items-center justify-center text-brand-green text-4xl shadow-2xl mb-8 border-4 border-white animate-float-medium">
+            <div className="reveal pt-8 lg:pt-16 flex flex-col items-center justify-center text-center relative z-20">
+              <div className="w-16 h-16 lg:w-24 lg:h-24 bg-brand-dark rounded-full flex items-center justify-center text-brand-green text-3xl lg:text-4xl shadow-2xl mb-6 lg:mb-8 border-4 border-white animate-float-medium">
                 <i className="fas fa-certificate"></i>
               </div>
 
-              <h3 className="text-3xl font-bold text-brand-dark mb-4">
+              <h3 className="text-2xl lg:text-3xl font-bold text-brand-dark mb-4">
                 Certificación Ambiental
               </h3>
-              <p className="text-brand-gray max-w-xl mb-8 text-lg">
+              <p className="text-brand-gray max-w-xl mb-6 lg:mb-8 text-base lg:text-lg">
                 El ciclo finaliza con la emisión de tu{" "}
                 <strong>Certificado de Aprovechamiento</strong>, un documento
                 legal que valida tu cumplimiento normativo y respalda tus
@@ -225,13 +233,13 @@ export default function ProcesoPage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/contacto"
-                  className="btn-primary px-10 py-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-green hover:shadow-lg transition-all"
+                <button
+                  onClick={() => handleOpenModal('recoleccion')}
+                  className="btn-primary px-8 lg:px-10 py-3 lg:py-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-green hover:shadow-lg transition-all text-sm lg:text-base"
                 >
                   Solicitar Recolección <i className="fas fa-arrow-right"></i>
-                </Link>
-                <button className="px-10 py-4 bg-white border border-gray-200 text-brand-dark font-bold rounded-xl hover:border-brand-green hover:text-brand-green transition-colors flex items-center justify-center gap-2">
+                </button>
+                <button className="px-8 lg:px-10 py-3 lg:py-4 bg-white border border-gray-200 text-brand-dark font-bold rounded-xl hover:border-brand-green hover:text-brand-green transition-colors flex items-center justify-center gap-2 text-sm lg:text-base">
                   <i className="fas fa-download"></i> Ver Ejemplo de Certificado
                 </button>
               </div>
@@ -241,12 +249,12 @@ export default function ProcesoPage() {
       </section>
 
       {/* Métricas del Proceso */}
-      <section className="py-24 bg-brand-dark text-white relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-brand-dark text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-green opacity-10 rounded-full blur-[100px] transform translate-x-1/3 -translate-y-1/3"></div>
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600 opacity-10 rounded-full blur-[80px] transform -translate-x-1/3 translate-y-1/3"></div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16 reveal">
+        <div className="container-eco relative z-10">
+          <div className="text-center mb-12 lg:mb-16 reveal">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/20 border border-brand-green/30 mb-6">
               <i className="fas fa-microchip text-brand-green text-xs"></i>
               <span className="text-xs font-bold text-brand-green uppercase tracking-widest">
@@ -254,7 +262,7 @@ export default function ProcesoPage() {
               </span>
             </div>
 
-            <h2 className="text-4xl font-bold mb-6 leading-tight">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 leading-tight">
               Lo que no se mide, <br /> no se puede mejorar.
             </h2>
             <p className="text-gray-400 text-lg mb-8 leading-relaxed max-w-3xl mx-auto">
@@ -264,16 +272,16 @@ export default function ProcesoPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {metricas.map((metrica, index) => (
               <div
                 key={index}
-                className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors text-center reveal"
+                className="bg-white/5 p-6 lg:p-8 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors text-center reveal"
               >
                 <i
-                  className={`${metrica.icono} ${metrica.color} text-3xl mb-4`}
+                  className={`${metrica.icono} ${metrica.color} text-2xl lg:text-3xl mb-4`}
                 ></i>
-                <div className="text-5xl font-bold text-white mb-2">
+                <div className="text-4xl lg:text-5xl font-bold text-white mb-2">
                   {metrica.valor}
                 </div>
                 <h4 className="text-lg font-semibold text-gray-300">
@@ -286,17 +294,17 @@ export default function ProcesoPage() {
       </section>
 
       {/* Cumplimiento Normativo */}
-      <section className="py-20 bg-gray-50 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center reveal">
-          <h2 className="text-3xl font-bold text-brand-dark mb-12">
+      <section className="py-12 lg:py-20 bg-gray-50 border-t border-gray-200">
+        <div className="container-eco text-center reveal">
+          <h2 className="text-2xl lg:text-3xl font-bold text-brand-dark mb-8 lg:mb-12">
             Operamos bajo estricto cumplimiento normativo
           </h2>
 
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 hover:opacity-100 transition-all duration-500">
+          <div className="flex flex-col sm:flex-row justify-center gap-6 lg:gap-8 md:gap-16 opacity-70 hover:opacity-100 transition-all duration-500">
             {normativas.map((norma, index) => (
               <div key={index} className="flex items-center gap-3">
-                <i className={`${norma.icon} text-4xl text-brand-gray`}></i>
-                <span className="font-bold text-xl text-brand-gray">
+                <i className={`${norma.icon} text-3xl lg:text-4xl text-brand-gray`}></i>
+                <span className="font-bold text-lg lg:text-xl text-brand-gray">
                   {norma.text}
                 </span>
               </div>
@@ -306,9 +314,9 @@ export default function ProcesoPage() {
       </section>
 
       {/* CTA Final */}
-      <section className="py-20 bg-gradient-to-r from-brand-green to-green-700 text-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">
+      <section className="py-12 lg:py-20 bg-gradient-to-r from-brand-green to-green-700 text-white">
+        <div className="container-eco text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-6">
             ¿Quieres Implementar Este Proceso?
           </h2>
           <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
@@ -316,21 +324,25 @@ export default function ProcesoPage() {
             sistema probado y certificado de aprovechamiento.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/contacto"
+            <button
+              onClick={() => handleOpenModal('proceso')}
               className="btn-secondary text-lg px-8 py-4 rounded-full font-semibold"
             >
               <i className="fas fa-phone mr-2"></i> Iniciar Proceso
-            </Link>
-            <Link
-              href="/contacto"
-              className="bg-green-800 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-green-900 transition"
-            >
+            </button>
+            <button className="bg-green-800 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-green-900 transition">
               <i className="fas fa-download mr-2"></i> Descargar Brochure
-            </Link>
+            </button>
           </div>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={showModal} 
+        onClose={() => setShowModal(false)} 
+        serviceType={modalType} 
+      />
 
       <Footer />
       <WhatsAppButton />

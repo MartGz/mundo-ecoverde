@@ -1,4 +1,3 @@
-// components/WhatsAppButton.tsx - Versión simplificada
 "use client";
 
 import { useState } from "react";
@@ -104,9 +103,9 @@ export default function WhatsAppButton() {
       {/* Botón flotante */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-green transition-all duration-300 hover:scale-110"
+        className="relative w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-green transition-all duration-300 hover:scale-110"
       >
-        <i className="fab fa-whatsapp text-white text-2xl"></i>
+        <i className="fab fa-whatsapp text-white text-xl lg:text-2xl"></i>
 
         {/* Indicador animado */}
         <span className="absolute -top-1 -right-1 flex h-6 w-6">

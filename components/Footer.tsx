@@ -1,15 +1,14 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-100 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
+    <footer className="bg-white border-t border-gray-100 pt-12 lg:pt-16 pb-8">
+      <div className="container-eco">
+        <div className="grid md:grid-cols-4 gap-8 lg:gap-12 mb-8 lg:mb-12">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-24 h-24 relative flex items-center justify-center">
-                <Image
+              <div className="w-20 h-20 lg:w-24 lg:h-24 relative flex items-center justify-center">
+                <img
                   src="/images/logos/logo.png"
                   alt="MundoEcoVerde Logo"
                   width={96}
@@ -17,19 +16,19 @@ export default function Footer() {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="font-bold text-3xl text-brand-dark">
+              <span className="font-bold text-2xl lg:text-3xl text-brand-dark">
                 Mundo Eco Verde
               </span>
             </div>
-            <p className="text-brand-gray text-sm leading-relaxed max-w-sm">
+            <p className="text-brand-gray text-sm lg:text-base leading-relaxed max-w-sm">
               Comprometidos con el desarrollo sostenible y la economía circular.
               Transformamos residuos en oportunidades para un futuro más limpio.
             </p>
           </div>
 
           <div>
-            <h4 className="font-bold text-brand-dark mb-4">Empresa</h4>
-            <ul className="space-y-2 text-sm text-brand-gray">
+            <h4 className="font-bold text-brand-dark mb-4 text-lg">Empresa</h4>
+            <ul className="space-y-2 text-sm lg:text-base text-brand-gray">
               <li>
                 <Link
                   href="/nosotros"
@@ -58,8 +57,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-brand-dark mb-4">Contacto</h4>
-            <ul className="space-y-2 text-sm text-brand-gray">
+            <h4 className="font-bold text-brand-dark mb-4 text-lg">Contacto</h4>
+            <ul className="space-y-2 text-sm lg:text-base text-brand-gray">
               <li className="flex items-center gap-2">
                 <i className="fas fa-phone text-brand-green"></i>
                 +57 371 886 6549
@@ -67,6 +66,10 @@ export default function Footer() {
               <li className="flex items-center gap-2">
                 <i className="fas fa-envelope text-brand-green"></i>
                 asociacionmundoecoverde@gmail.com
+              </li>
+              <li className="flex items-center gap-2">
+                <i className="fas fa-map-marker-alt text-brand-green"></i>
+                Cartagena, Colombia
               </li>
             </ul>
           </div>
