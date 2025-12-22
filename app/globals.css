@@ -1,10 +1,46 @@
 @import "tailwindcss";
 
+@theme {
+  /* Fuentes */
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  
+  /* Colores personalizados */
+  --color-brand-green-light: #49a739;
+  --color-brand-green: #49a739;
+  --color-brand-green-dark: #3d8f2f;
+  --color-brand-green-darker: #2e7d32;
+  
+  --color-brand-dark: #111827;
+  --color-brand-light: #f9fafb;
+  --color-brand-white: #ffffff;
+  
+  /* Grises adicionales */
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-light: #f3f4f6;
+  --color-gray: #4b5563;
+  --color-gray-dark: #374151;
+  
+  /* Verdes adicionales */
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  
+  /* Sombras personalizadas */
+  --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+  --shadow-green: 0 20px 40px -15px rgba(73, 167, 57, 0.4);
+  --shadow-glow: 0 0 20px rgba(73, 167, 57, 0.5);
+  
+  /* Animaciones */
+  --animate-float-slow: float 6s ease-in-out infinite;
+  --animate-float-medium: float 5s ease-in-out infinite;
+}
+
 /* Estilos base */
 body {
   background-color: #ffffff;
-  color: #1f2937;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #111827;
+  font-family: var(--font-sans);
   overflow-x: hidden;
 }
 
@@ -142,7 +178,7 @@ body {
   background: #ffffff;
   border-radius: 1.5rem;
   border: 1px solid #f3f4f6;
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
   transition: all 0.4s ease;
   position: relative;
   z-index: 10;

@@ -76,7 +76,6 @@ export default function ContactoPage() {
               <h3 className="text-xl font-bold text-brand-dark mb-3">Horario de Atención</h3>
               <div className="space-y-2">
                 <p className="font-medium text-brand-gray">Lun-Vie: 7:00 AM - 5:00 PM</p>
-                <p className="font-medium text-brand-gray">Sábados: 7:00 AM - 12:00 PM</p>
                 <p className="font-medium text-brand-green font-bold">Domingos: Cerrado</p>
               </div>
             </div>

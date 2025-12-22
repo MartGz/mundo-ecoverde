@@ -25,62 +25,87 @@ export default function ServiciosPage() {
     return () => observer.disconnect()
   }, [])
 
-  const serviciosDetallados = [
+  const serviciosOperativos = [
     {
-      icon: 'fas fa-truck-ramp-box',
-      title: 'Recolección Selectiva',
-      description: 'Implementamos rutas de recolección optimizadas para el retiro de residuos aprovechables directamente en la fuente. Garantizamos puntualidad y trazabilidad.',
-      features: ['Flota propia', 'Personal uniformado', 'Frecuencias a medida']
+      icon: 'fas fa-truck-loading',
+      title: 'Recolección de Residuos',
+      description: 'Micro y macro rutas optimizadas para el retiro eficiente de materiales aprovechables directamente en la fuente.',
+      features: ['Micro rutas comunitarias', 'Macro rutas empresariales', 'Programación flexible']
     },
     {
-      icon: 'fas fa-recycle',
-      title: 'Clasificación ECA',
-      description: 'En nuestra Estación de Clasificación y Aprovechamiento (ECA), procesamos los materiales para reintroducirlos a la cadena productiva.',
-      features: ['Tecnología de prensado', 'Selección manual experta', 'Trazabilidad del residuo']
+      icon: 'fas fa-truck',
+      title: 'Transporte de Residuos',
+      description: 'Transporte seguro y especializado de materiales aprovechables hacia nuestra Estación de Clasificación.',
+      features: ['Flota propia certificada', 'Logística optimizada', 'Seguimiento GPS']
     },
     {
-      icon: 'fas fa-dumpster',
-      title: 'Gestión Integral de Residuos',
-      description: 'Administramos el cuarto de basuras de tu copropiedad o empresa bajo normativa vigente. Nos encargamos del manejo de residuos ordinarios y reciclables.',
-      features: ['Cumplimiento PGIRS', 'Certificados de disposición', 'Mantenimiento de áreas']
+      icon: 'fas fa-warehouse',
+      title: 'Clasificación en ECA',
+      description: 'Procesamiento técnico en nuestra Estación de Clasificación y Aprovechamiento (ECA) con los más altos estándares.',
+      features: ['Clasificación manual experta', 'Almacenamiento seguro', 'Control de calidad']
     },
     {
-      icon: 'fas fa-hand-holding-dollar',
-      title: 'Comercialización',
-      description: 'Compramos y vendemos materiales reciclables al por mayor. Conectamos generadores con industrias transformadoras asegurando precios justos.',
-      features: ['Precios del mercado', 'Logística incluida', 'Contratos a largo plazo']
-    },
+      icon: 'fas fa-industry',
+      title: 'Transformación de Materiales',
+      description: 'Valorización y transformación de residuos para su reintroducción a las cadenas productivas.',
+      features: ['Prensado y compactación', 'Procesamiento especializado', 'Valorización máxima']
+    }
+  ]
+
+  const serviciosSociales = [
     {
       icon: 'fas fa-chalkboard-user',
-      title: 'Educación Ambiental',
-      description: 'Sensibilizamos a tu equipo o comunidad. Dictamos talleres lúdicos y técnicos sobre separación en la fuente y sostenibilidad.',
-      features: ['Talleres prácticos', 'Señalética informativa', 'Campañas de impacto']
+      title: 'Capacitación y Sensibilización',
+      description: 'Programas educativos para comunidades y empresas sobre la importancia del reciclaje y manejo de residuos.',
+      features: ['Talleres prácticos', 'Charlas empresariales', 'Material didáctico']
     },
     {
-      icon: 'fas fa-broom',
-      title: 'Limpieza Especializada',
-      description: 'Servicios de aseo técnico para eventos, finalización de obras, fachadas y espacios públicos con productos biodegradables.',
-      features: ['Maquinaria especializada', 'Personal certificado', 'Disposición final']
+      icon: 'fas fa-seedling',
+      title: 'Proyectos Ambientales',
+      description: 'Desarrollo e implementación de proyectos sostenibles que beneficien a la comunidad y al medio ambiente.',
+      features: ['Diagnóstico ambiental', 'Diseño de proyectos', 'Implementación y seguimiento']
+    },
+    {
+      icon: 'fas fa-bullhorn',
+      title: 'Campañas Pedagógicas',
+      description: 'Campañas de separación en la fuente para mejorar los índices de reciclaje y conciencia ambiental.',
+      features: ['Campañas comunitarias', 'Separación en fuente', 'Monitoreo de resultados']
+    },
+    {
+      icon: 'fas fa-handshake',
+      title: 'Comercialización Certificada',
+      description: 'Comercialización y disposición final certificada de materiales aprovechables con trazabilidad completa.',
+      features: ['Certificados de disposición', 'Precios competitivos', 'Trazabilidad completa']
     }
+  ]
+
+  const materiales = [
+    { name: 'Papel y Cartón', icon: 'fas fa-newspaper', color: 'text-blue-600' },
+    { name: 'Plástico', icon: 'fas fa-bottle-water', color: 'text-red-500' },
+    { name: 'Vidrio', icon: 'fas fa-wine-glass', color: 'text-green-600' },
+    { name: 'Aluminio', icon: 'fas fa-cubes', color: 'text-gray-600' },
+    { name: 'Tetra-Pak', icon: 'fas fa-box', color: 'text-yellow-600' },
+    { name: 'Aceite Usado', icon: 'fas fa-oil-can', color: 'text-amber-700' },
+    { name: 'Botellas de Amor', icon: 'fas fa-heart', color: 'text-pink-500' }
   ]
 
   const sectores = [
     {
       icon: 'fas fa-building-user',
       title: 'Residencial',
-      desc: 'Conjuntos cerrados, edificios y barrios organizados.',
+      desc: 'Conjuntos cerrados, edificios, barrios y comunidades organizadas.',
       color: 'text-brand-green'
     },
     {
       icon: 'fas fa-store',
       title: 'Comercial',
-      desc: 'Centros comerciales, oficinas, restaurantes y hoteles.',
+      desc: 'Centros comerciales, oficinas, restaurantes, hoteles y establecimientos.',
       color: 'text-blue-600'
     },
     {
       icon: 'fas fa-industry',
       title: 'Industrial',
-      desc: 'Fábricas, bodegas y zonas francas con residuos especiales.',
+      desc: 'Fábricas, bodegas, zonas francas y empresas con residuos especiales.',
       color: 'text-orange-500'
     }
   ]
@@ -96,22 +121,30 @@ export default function ServiciosPage() {
 
         <div className="container-eco text-center reveal relative z-10">
           <div className="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-wider text-brand-green uppercase bg-green-100 rounded-full">
-            Nuestros Servicios
+            Portafolio de Servicios Integrales
           </div>
           <h1 className="text-3xl lg:text-4xl xl:text-6xl font-extrabold text-brand-dark mb-6">
-            Soluciones para un <br /> <span className="text-gradient">Mundo Más Limpio</span>
+            Dignificamos el Reciclaje, <br /> <span className="text-gradient">Transformamos el Futuro</span>
           </h1>
           <p className="text-lg text-brand-gray max-w-2xl mx-auto leading-relaxed">
-            Ofrecemos un portafolio integral diseñado para cubrir todas las necesidades de gestión de residuos de tu empresa, conjunto residencial o industria.
+            Ofrecemos servicio público de aseo especializado en aprovechamiento, generando prosperidad para la comunidad y dignificando la labor del reciclador.
           </p>
         </div>
       </section>
 
-      {/* Servicios Detallados */}
-      <section className="py-12 lg:py-24 bg-white">
+      {/* Servicios Operativos */}
+      <section className="py-12 lg:py-20 bg-white">
         <div className="container-eco">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-            {serviciosDetallados.map((service, index) => (
+          <div className="text-center mb-12 reveal">
+            <h2 className="text-3xl font-bold text-brand-dark">Gestión Operativa</h2>
+            <div className="w-20 h-1 bg-brand-green mx-auto mt-4 rounded-full"></div>
+            <p className="text-brand-gray mt-4 max-w-2xl mx-auto">
+              Servicios técnicos especializados para el manejo eficiente de materiales aprovechables
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+            {serviciosOperativos.map((service, index) => (
               <div 
                 key={index}
                 className="feature-card p-8 group h-full flex flex-col reveal"
@@ -134,6 +167,71 @@ export default function ServiciosPage() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Servicios Sociales */}
+      <section className="py-12 lg:py-20 bg-brand-light">
+        <div className="container-eco">
+          <div className="text-center mb-12 reveal">
+            <h2 className="text-3xl font-bold text-brand-dark">Gestión Social</h2>
+            <div className="w-20 h-1 bg-brand-green mx-auto mt-4 rounded-full"></div>
+            <p className="text-brand-gray mt-4 max-w-2xl mx-auto">
+              Programas comunitarios y educativos para el desarrollo sostenible
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+            {serviciosSociales.map((service, index) => (
+              <div 
+                key={index}
+                className="feature-card p-8 group h-full flex flex-col reveal"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="w-20 h-20 bg-brand-green/10 rounded-full flex items-center justify-center mb-6 text-brand-green group-hover:bg-brand-green group-hover:text-white transition-colors duration-300 mx-auto">
+                  <i className={`${service.icon} text-3xl`}></i>
+                </div>
+
+                <h4 className="text-xl font-bold text-brand-dark mb-3">{service.title}</h4>
+                <p className="text-brand-gray text-sm leading-relaxed mb-6 flex-grow">
+                  {service.description}
+                </p>
+
+                <ul className="text-sm text-brand-gray space-y-3 pt-4 border-t border-gray-100">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center gap-2">
+                      <i className="fas fa-circle-check text-brand-green"></i>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Materiales que Aprovechamos */}
+      <section className="py-12 lg:py-20 bg-white">
+        <div className="container-eco">
+          <div className="text-center mb-12 reveal">
+            <h2 className="text-3xl font-bold text-brand-dark">Materiales que Aprovechamos</h2>
+            <div className="w-20 h-1 bg-brand-green mx-auto mt-4 rounded-full"></div>
+            <p className="text-brand-gray mt-4 max-w-2xl mx-auto">
+              Trabajamos con diversos materiales reciclables para maximizar el aprovechamiento
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-6">
+            {materiales.map((material, index) => (
+              <div key={index} className="text-center reveal" style={{ transitionDelay: `${index * 50}ms` }}>
+                <div className="w-16 h-16 bg-brand-light rounded-full flex items-center justify-center mx-auto mb-4 group hover:bg-brand-green transition-colors">
+                  <i className={`${material.icon} text-2xl ${material.color} group-hover:text-white transition-colors`}></i>
+                </div>
+                <h4 className="font-semibold text-brand-dark">{material.name}</h4>
               </div>
             ))}
           </div>
@@ -168,15 +266,15 @@ export default function ServiciosPage() {
           <div className="bg-brand-dark rounded-[2.5rem] p-10 md:p-16 text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-green opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
             
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10">¿Listo para optimizar tu gestión de residuos?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10">¿Listo para dignificar el reciclaje con nosotros?</h2>
             <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto relative z-10">
-              Contáctanos hoy mismo para una evaluación gratuita y descubre cuánto puedes ahorrar y contribuir al planeta.
+              Contáctanos y juntos transformemos el futuro a través del aprovechamiento sostenible.
             </p>
             <button 
               onClick={() => setShowModal(true)}
               className="btn-primary px-10 py-4 rounded-xl font-bold text-lg shadow-green hover:shadow-white inline-flex items-center gap-3 relative z-10"
             >
-              Solicitar Cotización <i className="fas fa-arrow-right"></i>
+              ¡Contáctanos! <i className="fas fa-arrow-right"></i>
             </button>
           </div>
         </div>
