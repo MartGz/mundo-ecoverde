@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
+import { createContactMessage } from '@/app/actions/admin'
 
 interface ContactModalProps {
   isOpen: boolean
@@ -63,12 +64,7 @@ export default function ContactModal({ isOpen, onClose, serviceType = 'cotizacio
 
     try {
       const emailBody = `
-Nueva solicitud - Mundo Eco Verde
-Tipo: ${getTitle()}
-
 📋 Información del Cliente:
-Nombre: ${formData.name}
-Email: ${formData.email}
 Teléfono: ${formData.phone}
 ${formData.company ? `Empresa: ${formData.company}` : ''}
 
@@ -82,30 +78,36 @@ ${formData.volume ? `Volumen aproximado: ${formData.volume}` : ''}
 ${formData.message}
       `.trim()
 
-      const mailtoLink = `mailto:asociacionmundoecoverde@gmail.com?subject=${encodeURIComponent(getTitle())} - ${formData.name}&body=${encodeURIComponent(emailBody)}`
+      // Enviar el mensaje a la base de datos a través del Server Action
+      const result = await createContactMessage({
+        name: formData.name,
+        email: formData.email,
+        subject: getTitle() + (formData.company ? ` - ${formData.company}` : ''),
+        message: emailBody
+      })
       
-      window.location.href = mailtoLink
-      
+      if (!result.success) {
+        throw new Error('No se pudo guardar el mensaje en la base de datos');
+      }
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: serviceType === 'cotizacion' ? 'Cotización de Servicios' : 
+                serviceType === 'recoleccion' ? 'Solicitud de Recolección' : 
+                'Proceso de Reciclaje',
+        message: '',
+        company: '',
+        address: '',
+        schedule: '',
+        volume: ''
+      })
+      setSubmitStatus('success')
+      setIsSubmitting(false)
       setTimeout(() => {
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          service: serviceType === 'cotizacion' ? 'Cotización de Servicios' : 
-                  serviceType === 'recoleccion' ? 'Solicitud de Recolección' : 
-                  'Proceso de Reciclaje',
-          message: '',
-          company: '',
-          address: '',
-          schedule: '',
-          volume: ''
-        })
-        setSubmitStatus('success')
-        setIsSubmitting(false)
-        setTimeout(() => {
-          onClose()
-        }, 2000)
-      }, 100)
+        onClose()
+      }, 2000)
     } catch (error) {
       console.error('Error submitting form:', error)
       setSubmitStatus('error')
@@ -332,6 +334,13 @@ ${formData.message}
               <div className="p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-center">
                 <i className="fas fa-check-circle mr-2"></i>
                 ¡Solicitud enviada exitosamente! Te contactaremos pronto.
+              </div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-center">
+                <i className="fas fa-exclamation-circle mr-2"></i>
+                Ocurrió un error al enviar el mensaje. Intenta nuevamente.
               </div>
             )}
 

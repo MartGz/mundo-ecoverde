@@ -117,7 +117,7 @@ export default function ProcessSection() {
         <div className="text-center mb-12 lg:mb-20 reveal">
           <h2 className="text-brand-green font-bold uppercase text-sm mb-3 tracking-widest">Nuestro Proceso</h2>
           <h3 className="text-3xl lg:text-5xl font-extrabold text-brand-dark">
-            Ciclo Integral de Aprovechamiento
+            Ciclo Integral de Aprovechamiento 
           </h3>
           <p className="text-brand-gray mt-4 max-w-2xl mx-auto text-lg">
             Dignificamos el reciclaje a través de un proceso completo que transforma residuos en recursos
