@@ -3,7 +3,32 @@
 import Link from 'next/link'
 import { useEffect } from 'react'
 
-export default function AboutSection() {
+interface AboutContentProps {
+  eyebrow: string;
+  heading: string;
+  paragraph: string;
+  feature1Title: string;
+  feature1Desc: string;
+  feature2Title: string;
+  feature2Desc: string;
+  feature3Title: string;
+  feature3Desc: string;
+  image1Url: string;
+  image2Url: string;
+}
+
+interface AboutStatsProps {
+  tonnes: string;
+  allies: string;
+  certifiedPercent: string;
+}
+
+interface AboutSectionProps {
+  about: AboutContentProps;
+  stats: AboutStatsProps;
+}
+
+export default function AboutSection({ about, stats }: AboutSectionProps) {
   useEffect(() => {
     // Animaciones Reveal
     const observer = new IntersectionObserver(
@@ -37,11 +62,11 @@ export default function AboutSection() {
             <div className="relative">
               {/* Main decorative element */}
               <div className="absolute -inset-4 bg-brand-green/10 rounded-[2.5rem] rotate-3 opacity-0 lg:opacity-30 -z-10 transition-transform duration-500 group-hover:rotate-1"></div>
-              
+
               <div className="grid grid-cols-2 gap-3 lg:gap-4">
                 <div className="space-y-3 lg:space-y-4">
-                  <img 
-                    src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2013&auto=format&fit=crop&ixlib=rb-4.0.3" 
+                  <img
+                    src={about.image1Url}
                     alt="Equipo trabajando en reciclaje"
                     className="w-full h-48 lg:h-64 object-cover rounded-2xl shadow-lg transform hover:-translate-y-2 transition-all duration-500"
                     loading="lazy"
@@ -56,7 +81,7 @@ export default function AboutSection() {
                     <p className="text-xs text-brand-gray mt-2">Impacto social positivo</p>
                   </div>
                 </div>
-                
+
                 <div className="space-y-3 lg:space-y-4 mt-8 lg:mt-0">
                   <div className="bg-brand-green/5 p-4 lg:p-6 rounded-2xl border border-brand-green/10">
                     <div className="flex items-center gap-3 mb-3">
@@ -69,9 +94,9 @@ export default function AboutSection() {
                       </div>
                     </div>
                   </div>
-                  
-                  <img 
-                    src="https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" 
+
+                  <img
+                    src={about.image2Url}
                     alt="Instalaciones modernas de reciclaje"
                     className="w-full h-48 lg:h-64 object-cover rounded-2xl shadow-lg transform hover:-translate-y-2 transition-all duration-500"
                     loading="lazy"
@@ -97,19 +122,16 @@ export default function AboutSection() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 rounded-full bg-brand-green/5 border border-brand-green/10 mb-4 lg:mb-6">
               <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
               <span className="text-xs font-bold text-brand-green uppercase tracking-wider">
-                Sobre Nosotros
+                {about.eyebrow}
               </span>
             </div>
 
             <h2 className="text-3xl lg:text-4xl font-bold text-brand-dark mb-4 lg:mb-6 leading-tight">
-              Más que reciclaje, <br className="hidden lg:block" />
-              creamos <span className="text-gradient">cultura ambiental</span>.
+              {about.heading}
             </h2>
 
             <p className="text-base lg:text-lg text-brand-gray mb-6 lg:mb-8 leading-relaxed">
-              En <span className="font-bold text-brand-dark">Mundo Eco Verde</span>, no solo gestionamos residuos; 
-              diseñamos soluciones. Desde 2018, hemos liderado la transformación de la industria del reciclaje 
-              integrando tecnología y dignidad humana.
+              {about.paragraph}
             </p>
 
             {/* Features List */}
@@ -120,10 +142,10 @@ export default function AboutSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-brand-dark text-lg lg:text-xl mb-1 lg:mb-2">
-                    Certificación Ambiental
+                    {about.feature1Title}
                   </h4>
                   <p className="text-sm lg:text-base text-brand-gray">
-                    Procesos auditados y cumplimiento normativo garantizado con trazabilidad total.
+                    {about.feature1Desc}
                   </p>
                 </div>
               </div>
@@ -134,10 +156,10 @@ export default function AboutSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-brand-dark text-lg lg:text-xl mb-1 lg:mb-2">
-                    Inclusión Social
+                    {about.feature2Title}
                   </h4>
                   <p className="text-sm lg:text-base text-brand-gray">
-                    Dignificamos la labor de más de 50 familias recicladoras con oportunidades de crecimiento.
+                    {about.feature2Desc}
                   </p>
                 </div>
               </div>
@@ -148,10 +170,10 @@ export default function AboutSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-brand-dark text-lg lg:text-xl mb-1 lg:mb-2">
-                    Sostenibilidad Integral
+                    {about.feature3Title}
                   </h4>
                   <p className="text-sm lg:text-base text-brand-gray">
-                    Modelo circular que beneficia al medio ambiente, la economía y la sociedad por igual.
+                    {about.feature3Desc}
                   </p>
                 </div>
               </div>
@@ -161,25 +183,25 @@ export default function AboutSection() {
             <div className="grid grid-cols-3 gap-4 mb-8 lg:mb-10 py-6 border-t border-gray-100">
               <div className="text-center">
                 <div className="text-2xl lg:text-3xl font-extrabold text-brand-dark mb-1">
-                  50k<span className="text-brand-green text-xl lg:text-2xl">+</span>
+                  {stats.tonnes}
                 </div>
                 <div className="text-xs lg:text-sm font-semibold text-brand-gray uppercase tracking-wide">
                   Toneladas
                 </div>
               </div>
-              
+
               <div className="text-center border-x border-gray-200">
                 <div className="text-2xl lg:text-3xl font-extrabold text-brand-dark mb-1">
-                  120<span className="text-brand-green text-xl lg:text-2xl">+</span>
+                  {stats.allies}
                 </div>
                 <div className="text-xs lg:text-sm font-semibold text-brand-gray uppercase tracking-wide">
                   Aliados
                 </div>
               </div>
-              
+
               <div className="text-center">
                 <div className="text-2xl lg:text-3xl font-extrabold text-brand-dark mb-1">
-                  100<span className="text-brand-green text-xl lg:text-2xl">%</span>
+                  {stats.certifiedPercent}
                 </div>
                 <div className="text-xs lg:text-sm font-semibold text-brand-gray uppercase tracking-wide">
                   Certificado
@@ -188,8 +210,8 @@ export default function AboutSection() {
             </div>
 
             {/* CTA Link */}
-            <Link 
-              href="/nosotros" 
+            <Link
+              href="/nosotros"
               className="inline-flex items-center gap-2 lg:gap-3 text-brand-green font-bold hover:text-brand-dark transition-colors group border-b-2 border-brand-green pb-2"
             >
               <span className="text-base lg:text-lg">

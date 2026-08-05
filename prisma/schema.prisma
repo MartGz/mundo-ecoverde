@@ -37,6 +37,7 @@ model Service {
   title       String
   description String
   icon        String?
+  category    String   @default("OPERATIVO") // OPERATIVO, SOCIAL
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -50,4 +51,126 @@ model Initiative {
   status      String   @default("ACTIVE") // ACTIVE, COMPLETED, PLANNED
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// ============ CMS: contenido editable del sitio público ============
+
+model SiteSettings {
+  id          String   @id @default("main")
+  phone       String
+  whatsapp    String
+  email       String
+  addressLine String
+  addressCity String
+  mapUrl      String?
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteStats {
+  id               String   @id @default("main")
+  yearsExperience  String
+  tonnes           String
+  allies           String
+  families         String
+  certifiedPercent String
+  updatedAt        DateTime @updatedAt
+}
+
+model HeroContent {
+  id                 String   @id @default("main")
+  badge              String
+  titleLine1         String
+  titleGradient      String
+  subtitle           String
+  cta1Text           String
+  cta2Text           String
+  image1Url          String
+  image2Url          String
+  floatingBadgeText  String
+  floatingBadgeValue String
+  updatedAt          DateTime @updatedAt
+}
+
+model AboutContent {
+  id            String   @id @default("main")
+  eyebrow       String
+  heading       String
+  paragraph     String
+  feature1Title String
+  feature1Desc  String
+  feature2Title String
+  feature2Desc  String
+  feature3Title String
+  feature3Desc  String
+  image1Url     String
+  image2Url     String
+  updatedAt     DateTime @updatedAt
+}
+
+model NosotrosContent {
+  id              String   @id @default("main")
+  heroEyebrow     String
+  heroHeading     String
+  heroParagraph   String
+  storyParagraph1 String
+  storyParagraph2 String
+  storyParagraph3 String
+  teamImageUrl    String
+  missionText1    String
+  missionText2    String
+  visionText1     String
+  visionText2     String
+  ctaHeading      String
+  ctaParagraph    String
+  updatedAt       DateTime @updatedAt
+}
+
+model ValueItem {
+  id          String   @id @default(uuid())
+  order       Int      @default(0)
+  icon        String
+  title       String
+  description String
+  colorKey    String   @default("green") // green, blue, orange, purple, teal, red
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProcessMeta {
+  id           String   @id @default("main")
+  heroBadge    String
+  heroTitle    String
+  heroSubtitle String
+  metric1Value String
+  metric1Label String
+  metric1Icon  String
+  metric2Value String
+  metric2Label String
+  metric2Icon  String
+  metric3Value String
+  metric3Label String
+  metric3Icon  String
+  metric4Value String
+  metric4Label String
+  metric4Icon  String
+  normativas   Json     @default("[]") // [{ley, desc}]
+  updatedAt    DateTime @updatedAt
+}
+
+model ProcessStep {
+  id          String   @id @default(uuid())
+  order       Int      @default(0)
+  icon        String
+  title       String
+  description String
+  items       String[] @default([])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProcessMaterial {
+  id      String @id @default(uuid())
+  order   Int    @default(0)
+  name    String
+  percent Int
 }

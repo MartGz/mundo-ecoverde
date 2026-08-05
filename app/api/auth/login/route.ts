@@ -1,31 +1,50 @@
 import { NextResponse } from 'next/server';
+import bcrypt from 'bcryptjs';
+import { prisma } from '@/lib/prisma';
+import { signSessionToken, SESSION_COOKIE } from '@/lib/auth';
 
 export async function POST(request: Request) {
   try {
-    const { password } = await request.json();
+    const { email, password } = await request.json();
 
-    const adminPassword = process.env.ADMIN_PASSWORD;
-    const secretToken = process.env.ADMIN_SECRET_TOKEN;
-
-    if (!adminPassword || !secretToken) {
-      return NextResponse.json({ error: 'Configuración de servidor incompleta' }, { status: 500 });
+    if (!email || !password) {
+      return NextResponse.json({ error: 'Email y contraseña son requeridos' }, { status: 400 });
     }
 
-    if (password !== adminPassword) {
-      return NextResponse.json({ error: 'Contraseña incorrecta' }, { status: 401 });
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user || !user.password) {
+      return NextResponse.json({ error: 'Credenciales incorrectas' }, { status: 401 });
     }
+
+    const passwordMatches = await bcrypt.compare(password, user.password);
+    if (!passwordMatches) {
+      return NextResponse.json({ error: 'Credenciales incorrectas' }, { status: 401 });
+    }
+
+    if (user.role !== 'ADMIN') {
+      return NextResponse.json({ error: 'No tienes permisos de administrador' }, { status: 403 });
+    }
+
+    const token = await signSessionToken({
+      sub: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+    });
 
     const response = NextResponse.json({ success: true });
-    response.cookies.set('eco_admin_token', secretToken, {
+    response.cookies.set(SESSION_COOKIE, token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 7, // 7 days
-      path: '/'
+      path: '/',
     });
 
     return response;
-  } catch {
+  } catch (error) {
+    console.error('Login error:', error);
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
   }
 }

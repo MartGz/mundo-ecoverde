@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { getSiteSettings } from '@/app/actions/settings'
 import { MapPin, Clock, Phone, Mail } from 'lucide-react'
 
 export const metadata = {
@@ -8,7 +9,19 @@ export const metadata = {
   description: 'Contáctanos para solicitar información sobre nuestros servicios',
 }
 
-export default function ContactoPage() {
+export default async function ContactoPage() {
+  const { data: settings } = await getSiteSettings()
+
+  const phone = settings?.phone || '+57 314 728 9141'
+  const whatsapp = settings?.whatsapp || '+57 314 728 9141'
+  const email = settings?.email || 'asociacionmundoecoverde@gmail.com'
+  const addressLine = settings?.addressLine || 'Barrio Henequén, Calle Principal Mza D Lte 3'
+  const addressCity = settings?.addressCity || 'Cartagena, Bolívar, Colombia'
+  const whatsappUrl = `https://wa.me/${whatsapp.replace(/\D/g, '')}`
+  const mapsUrl =
+    settings?.mapUrl ||
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${addressLine} ${addressCity}`)}`
+
   return (
     <>
       <Navbar />
@@ -42,9 +55,9 @@ export default function ContactoPage() {
                 <Phone className="w-8 h-8 text-brand-green" />
               </div>
               <h3 className="text-xl font-bold text-brand-dark mb-3">Teléfono / WhatsApp</h3>
-              <p className="text-lg font-semibold text-brand-gray">+57 314 850 9312</p>
-              <a 
-                href="https://wa.me/573148509312" 
+              <p className="text-lg font-semibold text-brand-gray">{phone}</p>
+              <a
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 mt-4 text-brand-green font-semibold hover:text-brand-green/80"
@@ -59,10 +72,10 @@ export default function ContactoPage() {
               </div>
               <h3 className="text-xl font-bold text-brand-dark mb-3">Correo Electrónico</h3>
               <p className="text-lg font-semibold text-brand-gray break-all">
-                asociacionmundoecoverde@gmail.com
+                {email}
               </p>
-              <a 
-                href="mailto:asociacionmundoecoverde@gmail.com"
+              <a
+                href={`mailto:${email}`}
                 className="inline-flex items-center gap-2 mt-4 text-brand-green font-semibold hover:text-brand-green/80"
               >
                 <i className="fas fa-envelope"></i> Enviar correo
@@ -101,12 +114,12 @@ export default function ContactoPage() {
               <div className="flex items-center justify-center mb-2">
                 <MapPin className="w-6 h-6 mr-2" />
                 <p className="font-semibold text-lg">
-                  Barrio Henequén, Calle Principal Mza D Lte 3
+                  {addressLine}
                 </p>
               </div>
-              <p className="text-green-100 mb-4">Cartagena, Bolívar, Colombia</p>
-              <a 
-                href="https://www.google.com/maps/search/?api=1&query=Barrio+Henequén+Calle+Principal+Mza+D+Lte+3+Cartagena"
+              <p className="text-green-100 mb-4">{addressCity}</p>
+              <a
+                href={mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold bg-white text-brand-green hover:bg-gray-100"

@@ -1,6 +1,15 @@
 import Link from "next/link";
+import { getSiteSettings } from "@/app/actions/settings";
 
-export default function Footer() {
+export default async function Footer() {
+  const { data: settings } = await getSiteSettings();
+
+  const phone = settings?.phone || "+57 314 728 9141";
+  const email = settings?.email || "asociacionmundoecoverde@gmail.com";
+  const addressLine = settings?.addressLine || "";
+  const addressCity = settings?.addressCity || "Cartagena, Colombia";
+  const address = addressLine ? `${addressLine}, ${addressCity}` : addressCity;
+
   return (
     <footer className="bg-white border-t border-gray-100 pt-12 lg:pt-16 pb-8">
       <div className="container-eco">
@@ -61,15 +70,25 @@ export default function Footer() {
             <ul className="space-y-2 text-sm lg:text-base text-brand-gray">
               <li className="flex items-center gap-2">
                 <i className="fas fa-phone text-brand-green"></i>
-                +57 371 886 6549
+                <a
+                  href={`tel:${phone.replace(/\s+/g, '')}`}
+                  className="hover:text-brand-green transition-colors"
+                >
+                  {phone}
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <i className="fas fa-envelope text-brand-green"></i>
-                asociacionmundoecoverde@gmail.com
+                <a
+                  href={`mailto:${email}`}
+                  className="hover:text-brand-green transition-colors"
+                >
+                  {email}
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <i className="fas fa-map-marker-alt text-brand-green"></i>
-                Cartagena, Colombia
+                {address}
               </li>
             </ul>
           </div>

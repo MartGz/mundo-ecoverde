@@ -5,7 +5,7 @@ export default async function ServiciosPage() {
   const result = await getServices();
   const services = (result.data || []) as {
     id: string; title: string; description: string;
-    icon: string | null; isActive: boolean; createdAt: Date;
+    icon: string | null; category: string; isActive: boolean; createdAt: Date;
   }[];
   return <ServiciosClient initialServices={services} />;
 }
