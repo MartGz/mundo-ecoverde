@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mundo Eco Verde
 
-## Getting Started
+Sitio web para una empresa de gestión integral de residuos y soluciones ambientales, con un panel administrativo que permite editar todo el contenido del sitio sin tocar código.
 
-First, run the development server:
+**Sitio en vivo:** [mundoecoverde.co](https://www.mundoecoverde.co/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Funcionalidades
+
+**Sitio público**
+- Páginas de inicio, nosotros, servicios, proceso, iniciativas y contacto
+- Formulario de contacto cuyos mensajes llegan al panel
+- Contenido cargado desde la base de datos (textos, cifras, servicios, pasos del proceso, materiales)
+
+**Panel administrativo** (`/admin`)
+- Edición de cada sección: inicio, nosotros, servicios, proceso e iniciativas
+- Bandeja de mensajes del formulario de contacto
+- Gestión de usuarios con roles
+- Ajustes generales del sitio
+- Rutas protegidas por middleware con sesión firmada (JWT) y contraseñas con bcrypt
+
+## Stack
+
+| Capa | Tecnologías |
+| --- | --- |
+| Framework | Next.js 16 (App Router, Server Actions), React 19, TypeScript |
+| Estilos | Tailwind CSS v4, Lucide, React Icons |
+| Datos | PostgreSQL, Prisma 7 |
+| Autenticación | JWT (jose), bcrypt |
+| Despliegue | Vercel |
+
+## Estructura
+
+```
+mundo-ecoverde/
+├── app/
+│   ├── (páginas públicas)   # inicio, nosotros, servicios, proceso, iniciativas, contacto
+│   ├── admin/               # panel: login y dashboard por secciones
+│   ├── actions/             # Server Actions para guardar el contenido
+│   └── api/auth/            # inicio y cierre de sesión
+├── components/              # componentes de la interfaz
+├── lib/                     # autenticación y cliente de Prisma
+├── prisma/schema.prisma     # modelo de datos del contenido editable
+└── middleware.ts            # protección de las rutas /admin
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Ejecutar en local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+# Crea .env con DATABASE_URL y JWT_SECRET
+npx prisma db push
+npm run seed:admin -- admin@correo.com UnaClaveSegura
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Autor
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Desarrollado por **Martín García Zurique** · [DevMart Solutions](https://devmart.co) · [LinkedIn](https://www.linkedin.com/in/martin-elias-garcia)
